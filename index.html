@@ -9,13 +9,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <!-- Supabase JS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
 
     <!-- Tailwind Config -->
     <script>
@@ -294,6 +294,9 @@
 
         // Lógica Principal
         function initApp() {
+            if (window.appInitialized) return;
+            window.appInitialized = true;
+            
             try { loadLocalData(); } catch(e){}
             
             buildChapterSelect();
@@ -504,8 +507,21 @@
             });
         }
 
-        // Start
-        window.addEventListener('DOMContentLoaded', initApp);
+        // Start Blindado
+        function safeStart() {
+            try {
+                initApp();
+                renderIcons();
+            } catch (err) {
+                console.error("Erro na inicialização:", err);
+                const btn = document.getElementById('playerDisplay');
+                if(btn) btn.innerText = "ERRO: " + err.message;
+            }
+        }
+        
+        window.addEventListener('DOMContentLoaded', safeStart);
+        window.addEventListener('load', safeStart);
+        setTimeout(safeStart, 1000); // Fallback caso os eventos falhem
     </script>
 </body>
 </html>
