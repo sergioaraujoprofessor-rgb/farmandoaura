@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script defer src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <!-- Lucide Icons -->
     <script defer src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
@@ -353,11 +353,11 @@
         
         const SUPABASE_URL = 'https://tjvaszhoigbbqnbdpezx.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqdmFzemhvaWdiYnFuYmRwZXp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUwNzgzNTIsImV4cCI6MjEwMDY1NDM1Mn0.xBfUEaOBEc7_AFtuIHMJftrEBV4W3GUDL7Dh7IkYGbE';
-        let supabase = null;
+        let supabaseClient = null;
 
         // Tenta inicializar SDK do Supabase
         try {
-            if (window.supabase) supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+            if (window.supabase) supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         } catch(e) {}
 
         // DOM Elements
@@ -482,11 +482,11 @@
                 btn.disabled = true;
                 btn.innerHTML = `<span>Buscando na Nuvem...</span><div class="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin"></div>`;
                 status.classList.remove('hidden');
-                status.innerText = "Acessando o banco de dados...";
-
-                if (supabase) {
+                status.innerText = "Buscando na Nuvem...";
+                
+                if (supabaseClient) {
                     try {
-                        const { data, error } = await supabase.from('leaderboard').select('*').eq('student_name', name).single();
+                        const { data, error } = await supabaseClient.from('leaderboard').select('*').eq('student_name', name).single();
                         
                         if (data) {
                             // Encontrou o jogador
@@ -661,9 +661,9 @@
         }
 
         async function syncSupabase() {
-            if (!supabase || !playerData.id) return;
+            if (!supabaseClient || !playerData.id) return;
             try {
-                await supabase.from('leaderboard').upsert({ 
+                await supabaseClient.from('leaderboard').upsert({ 
                     id: playerData.id, 
                     student_name: playerData.name, 
                     score: playerData.aura,
@@ -679,13 +679,13 @@
             const list = document.getElementById('leaderboardList');
             list.innerHTML = `<div class="absolute inset-0 flex items-center justify-center text-slate-400">Consultando o Universo...</div>`;
             
-            if (!supabase) {
+            if (!supabaseClient) {
                 list.innerHTML = `<div class="text-center text-yellow-500 mt-10">Banco de Dados Offline.</div>`;
                 return;
             }
 
             try {
-                const { data, error } = await supabase.from('leaderboard').select('student_name, score, avatar').order('score', { ascending: false }).limit(20);
+                const { data, error } = await supabaseClient.from('leaderboard').select('student_name, score, avatar').order('score', { ascending: false }).limit(20);
                 if (error || !data) throw error;
                 
                 list.innerHTML = '';
