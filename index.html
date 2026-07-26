@@ -39,11 +39,13 @@
                         'float-up': 'floatUp 1.5s ease-out forwards',
                         'float-down': 'floatDown 1.5s ease-out forwards',
                         'blob': "blob 7s infinite",
+                        'float-idle': 'floatIdle 4s ease-in-out infinite',
                     },
                     keyframes: {
                         floatUp: { '0%': { opacity: 1, transform: 'translateY(0) scale(1)' }, '100%': { opacity: 0, transform: 'translateY(-60px) scale(1.2)' } },
                         floatDown: { '0%': { opacity: 1, transform: 'translateY(0) scale(1)' }, '100%': { opacity: 0, transform: 'translateY(60px) scale(0.8)' } },
-                        blob: { "0%": { transform: "translate(0px, 0px) scale(1)" }, "33%": { transform: "translate(30px, -50px) scale(1.1)" }, "66%": { transform: "translate(-20px, 20px) scale(0.9)" }, "100%": { transform: "translate(0px, 0px) scale(1)" } }
+                        blob: { "0%": { transform: "translate(0px, 0px) scale(1)" }, "33%": { transform: "translate(30px, -50px) scale(1.1)" }, "66%": { transform: "translate(-20px, 20px) scale(0.9)" }, "100%": { transform: "translate(0px, 0px) scale(1)" } },
+                        floatIdle: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-15px)' } }
                     }
                 }
             }
@@ -249,7 +251,7 @@
             
             <div class="w-32 h-32 mb-6 relative">
                 <div class="absolute inset-0 bg-yellow-400 rounded-full blur-3xl opacity-50 animate-pulse"></div>
-                <img src="./farmador_nobg.png" class="w-full h-full object-contain relative z-10 animate-float-up drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]">
+                <img src="./farmador_nobg.png" class="w-full h-full object-contain relative z-10 animate-float-idle drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]">
             </div>
 
             <h2 class="text-4xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-200 to-yellow-500 mb-2 drop-shadow-lg relative z-10">O CORTIÇO<br>CONCLUÍDO!</h2>
@@ -639,7 +641,7 @@
             }
 
             if (playerData.avatar && playerData.avatar.includes('/')) {
-                playerAvatar.innerHTML = `<img src="${playerData.avatar}" class="w-full h-full object-contain animate-float-up drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">`;
+                playerAvatar.innerHTML = `<img src="${playerData.avatar}" class="w-full h-full object-contain animate-float-idle drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">`;
             } else {
                 playerAvatar.innerText = playerData.avatar || '👤';
             }
