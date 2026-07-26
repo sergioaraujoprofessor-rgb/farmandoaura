@@ -11,6 +11,10 @@
     <script defer src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
+    <!-- Gerador de PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSK/6d101MDsZbOaMybfg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
     <!-- Lucide Icons -->
     <script defer src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
 
@@ -234,6 +238,83 @@
             
             <div class="flex-1 overflow-y-auto p-4 custom-scrollbar relative min-h-[300px]" id="leaderboardList">
                 <div class="absolute inset-0 flex items-center justify-center text-slate-500" id="leaderboardLoading">Carregando...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CONCLUSÃO -->
+    <div id="completionModal" class="fixed inset-0 z-[110] flex items-center justify-center bg-black/90 backdrop-blur-xl hidden opacity-0 transition-opacity duration-700">
+        <div class="glass-panel rounded-[2rem] p-10 max-w-lg w-full mx-4 shadow-[0_0_100px_rgba(251,191,36,0.3)] border-2 border-yellow-500/50 flex flex-col items-center text-center relative overflow-hidden group">
+            <div class="absolute inset-0 bg-gradient-to-t from-yellow-500/20 to-transparent"></div>
+            
+            <div class="w-32 h-32 mb-6 relative">
+                <div class="absolute inset-0 bg-yellow-400 rounded-full blur-3xl opacity-50 animate-pulse"></div>
+                <img src="https://con3ktar.nekoweb.org/farmador.png" class="w-full h-full object-contain relative z-10 animate-float-up drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]">
+            </div>
+
+            <h2 class="text-4xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-200 to-yellow-500 mb-2 drop-shadow-lg relative z-10">O CORTIÇO<br>CONCLUÍDO!</h2>
+            <p class="text-slate-300 mb-8 text-lg relative z-10 font-medium">Você completou todos os 23 desafios e se tornou o Maior Formador de Aura da escola!</p>
+            
+            <button onclick="gerarCertificado()" id="btnDownloadCert" class="relative z-10 w-full py-5 rounded-2xl bg-gradient-to-r from-yellow-600 to-yellow-400 text-dark-900 font-display font-black text-xl hover:scale-[1.02] transition-all shadow-[0_0_30px_rgba(251,191,36,0.6)] flex items-center justify-center gap-3">
+                <i data-lucide="download" class="w-6 h-6">⬇️</i>
+                BAIXAR MEU CERTIFICADO
+            </button>
+            <p id="certStatus" class="text-yellow-400 text-sm mt-4 hidden font-bold animate-pulse relative z-10">Gerando seu diploma...</p>
+        </div>
+    </div>
+
+    <!-- CERTIFICADO TEMPLATE (HIDDEN) -->
+    <div style="position: fixed; top: 0; left: -9999px; width: 1123px; height: 794px; background: white;" id="certificateTemplate">
+        <!-- Borda Externa -->
+        <div style="position: absolute; top: 20px; left: 20px; right: 20px; bottom: 20px; border: 8px solid #2f4f2f; padding: 4px;">
+            <!-- Borda Interna (Dourada) -->
+            <div style="position: absolute; top: 4px; left: 4px; right: 4px; bottom: 4px; border: 2px solid #b8860b; background-color: #fdfbf7; display: flex; flex-direction: column; align-items: center; padding: 40px; text-align: center; font-family: 'Times New Roman', serif;">
+                
+                <!-- Logos/Brasão (Simulado com texto elegante) -->
+                <div style="margin-top: 10px; border: 1px solid #b8860b; border-radius: 4px; padding: 8px; margin-bottom: 20px;">
+                    <span style="font-size: 14px; color: #b8860b; font-weight: bold; letter-spacing: 2px;">ESCOLA PÚBLICA DE SALINAS</span>
+                </div>
+                
+                <h1 style="font-size: 26px; color: #2f4f2f; margin-bottom: 10px; letter-spacing: 3px;">CERTIFICADO DE RECONHECIMENTO</h1>
+                
+                <h2 style="font-size: 55px; color: #2f4f2f; font-family: 'Georgia', serif; font-weight: bold; margin: 10px 0; text-transform: uppercase; text-shadow: 2px 2px 4px rgba(184, 134, 11, 0.3);">
+                    MAIOR FORMADOR<br>DE AURA
+                </h2>
+                
+                <div style="font-size: 20px; color: #333; margin-top: 40px; margin-bottom: 20px;">Concedido a:</div>
+                
+                <!-- Nome do Aluno Dinâmico -->
+                <div id="certStudentName" style="font-size: 42px; font-weight: bold; color: #111; border-bottom: 2px solid #2f4f2f; padding-bottom: 5px; width: 80%; margin-bottom: 20px; font-family: 'Brush Script MT', 'Dancing Script', cursive;">
+                    Nome do Aluno
+                </div>
+                
+                <p style="font-size: 18px; color: #444; width: 75%; line-height: 1.6; margin-bottom: 40px;">
+                    aluno(a) do 9º ano de Língua Portuguesa, por sua excelência na leitura e interpretação do romance "O Cortiço" de Aluísio Azevedo.<br>
+                    <strong>Ano de 2026.</strong>
+                </p>
+                
+                <!-- Assinaturas -->
+                <div style="display: flex; justify-content: space-between; width: 85%; margin-top: 50px;">
+                    <div style="width: 300px; text-align: center;">
+                        <div style="border-top: 1px solid #2f4f2f; padding-top: 10px; font-size: 16px;">
+                            Assinatura do Professor:<br>
+                            <strong>Professor Sérgio Araújo</strong>
+                        </div>
+                    </div>
+                    
+                    <div style="width: 300px; text-align: center;">
+                        <div style="border-top: 1px solid #2f4f2f; padding-top: 10px; font-size: 16px;">
+                            Assinatura da Direção
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Imagem do Avatar Farmador -->
+                <img src="https://con3ktar.nekoweb.org/farmador.png" style="position: absolute; right: 50px; top: 120px; width: 250px; opacity: 0.9; filter: drop-shadow(0px 0px 20px rgba(184, 134, 11, 0.6));" crossorigin="anonymous">
+                
+                <!-- Elementos Decorativos -->
+                <div style="position: absolute; left: 30px; bottom: 30px; font-size: 60px; color: #b8860b; opacity: 0.3;">✒️</div>
+                <div style="position: absolute; right: 30px; bottom: 30px; font-size: 60px; color: #b8860b; opacity: 0.3;">🌿</div>
             </div>
         </div>
     </div>
@@ -656,8 +737,62 @@
                     currentChapter++;
                     chapterSelect.value = currentChapter;
                     loadQuestion();
+                } else {
+                    // Completou o jogo!
+                    const modal = document.getElementById('completionModal');
+                    modal.classList.remove('hidden');
+                    setTimeout(() => modal.classList.remove('opacity-0'), 10);
                 }
             }, 1000);
+        }
+
+        window.gerarCertificado = async function() {
+            const btn = document.getElementById('btnDownloadCert');
+            const status = document.getElementById('certStatus');
+            
+            btn.disabled = true;
+            btn.classList.add('opacity-50', 'cursor-not-allowed');
+            status.classList.remove('hidden');
+
+            try {
+                // Põe o nome no template
+                document.getElementById('certStudentName').innerText = playerData.name || "Jogador";
+                
+                const template = document.getElementById('certificateTemplate');
+                
+                // Gera o Canvas com html2canvas
+                const canvas = await html2canvas(template, {
+                    scale: 2, // maior qualidade
+                    useCORS: true,
+                    backgroundColor: '#ffffff'
+                });
+
+                // Inicializa o jsPDF em modo paisagem (landscape)
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('l', 'mm', 'a4');
+                
+                // A4 landscape: 297mm x 210mm
+                const imgData = canvas.toDataURL('image/jpeg', 0.95);
+                pdf.addImage(imgData, 'JPEG', 0, 0, 297, 210);
+                
+                pdf.save(`Certificado_Maior_Formador_de_Aura_${playerData.name.replace(/\s+/g, '_')}.pdf`);
+                
+                status.innerText = "Certificado Baixado com Sucesso! 🎓";
+                status.classList.replace('text-yellow-400', 'text-emerald-400');
+            } catch (err) {
+                console.error(err);
+                status.innerText = "Erro ao gerar PDF. Tente novamente.";
+                status.classList.replace('text-yellow-400', 'text-rose-500');
+            } finally {
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    status.classList.add('hidden');
+                    status.innerText = "Gerando seu diploma...";
+                    status.classList.remove('text-emerald-400', 'text-rose-500');
+                    status.classList.add('text-yellow-400');
+                }, 3000);
+            }
         }
 
         async function syncSupabase() {
