@@ -206,10 +206,11 @@
 
                 <input type="text" id="playerNameInput" required placeholder="Seu Nome / Apelido" class="w-full bg-dark-900/50 border border-white/10 rounded-xl px-5 py-4 text-white text-center font-bold text-lg outline-none focus:border-brand-500 transition-colors">
                 
-                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(124,58,237,0.3)] transition-all hover:scale-[1.02]">
-                    <span>Entrar no Jogo</span>
-                    <i data-lucide="play" class="w-5 h-5 fallback-icon">▶</i>
+                <button type="submit" id="btnLoginSubmit" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-4 rounded-xl shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all flex items-center justify-center gap-2">
+                    <span>Entrar no Sistema</span>
+                    <i data-lucide="log-in" class="w-5 h-5 fallback-icon"></i>
                 </button>
+                <div id="loginStatus" class="text-center text-sm font-semibold text-brand-300 hidden"></div>
             </form>
         </div>
     </div>
@@ -468,20 +469,72 @@
             try { localStorage.setItem('cortico_v3', JSON.stringify(playerData)); } catch(e){}
         }
 
-        document.getElementById('loginForm').addEventListener('submit', (e) => {
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const name = document.getElementById('playerNameInput').value.trim();
+            const btn = document.getElementById('btnLoginSubmit');
+            const status = document.getElementById('loginStatus');
+
             if (name) {
-                playerData.id = 'id_' + Math.random().toString(36).substr(2, 9);
-                playerData.name = name;
-                playerData.avatar = 'https://con3ktar.nekoweb.org/farmador.png'; // Força o avatar único
+                btn.disabled = true;
+                btn.innerHTML = `<span>Buscando na Nuvem...</span><div class="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin"></div>`;
+                status.classList.remove('hidden');
+                status.innerText = "Acessando o banco de dados...";
+
+                if (supabase) {
+                    try {
+                        const { data, error } = await supabase.from('leaderboard').select('*').eq('student_name', name).single();
+                        
+                        if (data) {
+                            // Encontrou o jogador
+                            playerData.id = data.id;
+                            playerData.name = data.student_name;
+                            playerData.aura = data.score;
+                            playerData.avatar = data.avatar || 'https://con3ktar.nekoweb.org/farmador.png';
+                            playerData.history = [data.score];
+                            status.innerText = "Conta encontrada! Restaurando Aura...";
+                        } else {
+                            // Jogador Novo
+                            playerData.id = 'id_' + Math.random().toString(36).substr(2, 9);
+                            playerData.name = name;
+                            playerData.aura = 0;
+                            playerData.avatar = 'https://con3ktar.nekoweb.org/farmador.png';
+                            playerData.history = [0];
+                            status.innerText = "Novo perfil criado!";
+                        }
+                    } catch (err) {
+                        // Se falhou ou a api está offline (ex: erro de permissão ou não encontrou - o select().single() joga erro se não encontrar nada dependendo de como é feito)
+                        if (err.code === 'PGRST116') {
+                            // PGRST116 significa "0 rows returned" em um .single() query. É um jogador novo!
+                            playerData.id = 'id_' + Math.random().toString(36).substr(2, 9);
+                            playerData.name = name;
+                            playerData.aura = 0;
+                            playerData.avatar = 'https://con3ktar.nekoweb.org/farmador.png';
+                            playerData.history = [0];
+                            status.innerText = "Novo perfil criado!";
+                        } else {
+                            // Falha na conexão
+                            playerData.id = 'id_' + Math.random().toString(36).substr(2, 9);
+                            playerData.name = name;
+                            playerData.avatar = 'https://con3ktar.nekoweb.org/farmador.png';
+                            status.innerText = "Modo offline ativado.";
+                        }
+                    }
+                } else {
+                    // Sem supabase configurado
+                    playerData.id = 'id_' + Math.random().toString(36).substr(2, 9);
+                    playerData.name = name;
+                    playerData.avatar = 'https://con3ktar.nekoweb.org/farmador.png';
+                }
+
                 saveLocalData();
                 
-                document.getElementById('loginModal').classList.add('opacity-0');
-                setTimeout(() => document.getElementById('loginModal').classList.add('hidden'), 300);
-                
-                updateUI();
-                syncSupabase();
+                setTimeout(() => {
+                    document.getElementById('loginModal').classList.add('opacity-0');
+                    setTimeout(() => document.getElementById('loginModal').classList.add('hidden'), 300);
+                    updateUI();
+                    syncSupabase(); // Se era novo, já faz o insert
+                }, 1000);
             }
         });
 
