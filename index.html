@@ -282,8 +282,14 @@
             if (window.supabase) supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         } catch(e) {}
 
-        // AVATARES
-        const avatars = ['🦊', '🦉', '🦁', '🐼', '🐸', '🦄', '🐱', '🐶', '🐰', '🐙'];
+        const avatars = [
+            'avatares/sukuna.jpg',
+            'avatares/gojo.jpg',
+            'avatares/batman.png',
+            'avatares/sigma.jpg',
+            'avatares/goku.png',
+            '🦊', '🦁', '🐼' // Deixei alguns emojis caso eles não tenham todas as imagens
+        ];
         
         // DOM Elements
         const playerDisplay = document.getElementById('playerDisplay');
@@ -344,8 +350,14 @@
             const container = document.getElementById('avatarSelection');
             avatars.forEach(av => {
                 const div = document.createElement('div');
-                div.className = `avatar-option text-3xl cursor-pointer p-2 rounded-xl text-center border-2 border-transparent transition-all hover:bg-white/10`;
-                div.innerText = av;
+                div.className = `avatar-option text-3xl cursor-pointer p-2 rounded-xl text-center border-2 border-transparent transition-all hover:bg-white/10 flex items-center justify-center`;
+                
+                if (av.includes('/')) {
+                    div.innerHTML = `<img src="${av}" class="w-12 h-12 object-cover rounded-lg shadow-lg pointer-events-none" onerror="this.src='https://ui-avatars.com/api/?name=Aura&background=0D8ABC&color=fff'">`;
+                } else {
+                    div.innerText = av;
+                }
+                
                 if(av === playerData.avatar) div.classList.add('selected');
                 
                 div.onclick = () => {
@@ -376,7 +388,13 @@
 
         function updateUI() {
             playerDisplay.innerText = playerData.name;
-            playerAvatar.innerText = playerData.avatar;
+            
+            if (playerData.avatar && playerData.avatar.includes('/')) {
+                playerAvatar.innerHTML = `<img src="${playerData.avatar}" class="w-10 h-10 object-cover rounded-lg shadow-md" onerror="this.src='https://ui-avatars.com/api/?name=Aura&background=0D8ABC&color=fff'">`;
+            } else {
+                playerAvatar.innerText = playerData.avatar || '👤';
+            }
+
             auraScore.innerText = playerData.aura;
             if(window.auraChartInstance) {
                 auraChartInstance.data.labels = playerData.history.map((_, i) => 'Desafio ' + i);
@@ -469,12 +487,15 @@
                     if(index === 1) rankBadge = `<span class="w-8 h-8 flex items-center justify-center text-xl">🥈</span>`;
                     if(index === 2) rankBadge = `<span class="w-8 h-8 flex items-center justify-center text-xl">🥉</span>`;
 
-                    const av = player.avatar || '👤';
+                    let av = player.avatar || '👤';
+                    if (av.includes('/')) {
+                        av = `<img src="${av}" class="w-10 h-10 object-cover rounded-lg shadow-md border border-brand-500/30" onerror="this.src='https://ui-avatars.com/api/?name=Aura'">`;
+                    }
 
                     row.innerHTML = `
                         <div class="flex items-center gap-4">
                             ${rankBadge}
-                            <span class="text-2xl">${av}</span>
+                            <div class="flex items-center justify-center w-10 h-10 text-2xl">${av}</div>
                             <span class="font-bold text-lg text-white">${player.student_name}</span>
                         </div>
                         <div class="font-display font-black text-xl text-brand-400">${player.score}</div>
