@@ -191,22 +191,19 @@
     <div id="loginModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity">
         <div class="glass-panel rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl border border-white/10" id="loginModalContent">
             <div class="text-center mb-6">
-                <h2 class="text-2xl font-display font-bold text-white mb-2">Crie sua Identidade</h2>
-                <p class="text-slate-400 text-sm">Escolha seu avatar e digite seu nome para o ranking.</p>
+                <video src="https://con3ktar.nekoweb.org/coloque_os_n%C3%83%C2%BAmeros_e_rodan.mp4" autoplay loop muted playsinline class="w-full h-48 object-cover rounded-2xl mb-4 shadow-[0_0_30px_rgba(139,92,246,0.3)] border border-brand-500/30"></video>
+                <h2 class="text-2xl font-display font-bold text-white mb-2">Identifique-se</h2>
+                <p class="text-slate-400 text-sm">Digite seu nome para iniciar o Farm de Aura.</p>
             </div>
             
             <form id="loginForm" class="flex flex-col gap-6">
-                
-                <div>
-                    <label class="block text-xs uppercase tracking-widest text-slate-400 font-bold mb-3 text-center">Selecione seu Avatar</label>
-                    <div class="grid grid-cols-5 gap-3 justify-center" id="avatarSelection">
-                        <!-- Avatares JS -->
-                    </div>
-                </div>
 
-                <input type="text" id="playerNameInput" required placeholder="Seu Nome" class="w-full bg-dark-900/50 border border-white/10 rounded-xl px-5 py-4 text-white text-center font-bold text-lg outline-none focus:border-brand-500">
+                <input type="text" id="playerNameInput" required placeholder="Seu Nome / Apelido" class="w-full bg-dark-900/50 border border-white/10 rounded-xl px-5 py-4 text-white text-center font-bold text-lg outline-none focus:border-brand-500 transition-colors">
                 
-                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-4 rounded-xl">Entrar no Jogo</button>
+                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(124,58,237,0.3)] transition-all hover:scale-[1.02]">
+                    <span>Entrar no Jogo</span>
+                    <i data-lucide="play" class="w-5 h-5 fallback-icon">▶</i>
+                </button>
             </form>
         </div>
     </div>
@@ -271,7 +268,7 @@
 
         // VARIÁVEIS
         let currentChapter = 1;
-        let playerData = { id: null, name: null, avatar: '👤', aura: 0, history: [0] };
+        let playerData = { id: null, name: null, avatar: 'https://con3ktar.nekoweb.org/farmador.png', aura: 0, history: [0] };
         
         const SUPABASE_URL = 'https://tjvaszhoigbbqnbdpezx.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqdmFzemhvaWdiYnFuYmRwZXp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUwNzgzNTIsImV4cCI6MjEwMDY1NDM1Mn0.xBfUEaOBEc7_AFtuIHMJftrEBV4W3GUDL7Dh7IkYGbE';
@@ -282,15 +279,6 @@
             if (window.supabase) supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         } catch(e) {}
 
-        const avatars = [
-            'avatares/sukuna.jpg',
-            'avatares/gojo.jpg',
-            'avatares/batman.png',
-            'avatares/sigma.jpg',
-            'avatares/goku.png',
-            '🦊', '🦁', '🐼' // Deixei alguns emojis caso eles não tenham todas as imagens
-        ];
-        
         // DOM Elements
         const playerDisplay = document.getElementById('playerDisplay');
         const playerAvatar = document.getElementById('playerAvatar');
@@ -308,7 +296,6 @@
         function initApp() {
             try { loadLocalData(); } catch(e){}
             
-            buildAvatarSelection();
             buildChapterSelect();
             
             try { initChart(); } catch(e) { console.warn("Chart n carregou", e); }
@@ -346,36 +333,13 @@
             try { localStorage.setItem('cortico_v3', JSON.stringify(playerData)); } catch(e){}
         }
 
-        function buildAvatarSelection() {
-            const container = document.getElementById('avatarSelection');
-            avatars.forEach(av => {
-                const div = document.createElement('div');
-                div.className = `avatar-option text-3xl cursor-pointer p-2 rounded-xl text-center border-2 border-transparent transition-all hover:bg-white/10 flex items-center justify-center`;
-                
-                if (av.includes('/')) {
-                    div.innerHTML = `<img src="${av}" class="w-12 h-12 object-cover rounded-lg shadow-lg pointer-events-none" onerror="this.src='https://ui-avatars.com/api/?name=Aura&background=0D8ABC&color=fff'">`;
-                } else {
-                    div.innerText = av;
-                }
-                
-                if(av === playerData.avatar) div.classList.add('selected');
-                
-                div.onclick = () => {
-                    document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
-                    div.classList.add('selected');
-                    playerData.avatar = av;
-                };
-                container.appendChild(div);
-            });
-        }
-
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const name = document.getElementById('playerNameInput').value.trim();
             if (name) {
                 playerData.id = 'id_' + Math.random().toString(36).substr(2, 9);
                 playerData.name = name;
-                if(!playerData.avatar) playerData.avatar = '👤';
+                playerData.avatar = 'https://con3ktar.nekoweb.org/farmador.png'; // Força o avatar único
                 saveLocalData();
                 
                 document.getElementById('loginModal').classList.add('opacity-0');
