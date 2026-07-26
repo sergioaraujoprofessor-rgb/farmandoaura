@@ -17,7 +17,7 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Tailwind Config for Custom Aesthetics -->
+    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -29,45 +29,20 @@
                     },
                     colors: {
                         brand: {
-                            50: '#f5f3ff',
-                            100: '#ede9fe',
-                            200: '#ddd6fe',
-                            300: '#c4b5fd',
-                            400: '#a78bfa',
-                            500: '#8b5cf6',
-                            600: '#7c3aed',
-                            700: '#6d28d9',
-                            800: '#5b21b6',
-                            900: '#4c1d95',
-                            950: '#2e1065',
+                            50: '#f5f3ff', 100: '#ede9fe', 200: '#ddd6fe', 300: '#c4b5fd', 400: '#a78bfa',
+                            500: '#8b5cf6', 600: '#7c3aed', 700: '#6d28d9', 800: '#5b21b6', 900: '#4c1d95',
                         },
-                        dark: {
-                            900: '#09090b',
-                            800: '#18181b',
-                            700: '#27272a',
-                        }
+                        dark: { 900: '#09090b', 800: '#18181b', 700: '#27272a' }
                     },
                     animation: {
                         'float-up': 'floatUp 1.5s ease-out forwards',
                         'float-down': 'floatDown 1.5s ease-out forwards',
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'blob': "blob 7s infinite",
                     },
                     keyframes: {
-                        floatUp: {
-                            '0%': { opacity: 1, transform: 'translateY(0) scale(1)' },
-                            '100%': { opacity: 0, transform: 'translateY(-60px) scale(1.2)' },
-                        },
-                        floatDown: {
-                            '0%': { opacity: 1, transform: 'translateY(0) scale(1)' },
-                            '100%': { opacity: 0, transform: 'translateY(60px) scale(0.8)' },
-                        },
-                        blob: {
-                            "0%": { transform: "translate(0px, 0px) scale(1)" },
-                            "33%": { transform: "translate(30px, -50px) scale(1.1)" },
-                            "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
-                            "100%": { transform: "translate(0px, 0px) scale(1)" }
-                        }
+                        floatUp: { '0%': { opacity: 1, transform: 'translateY(0) scale(1)' }, '100%': { opacity: 0, transform: 'translateY(-60px) scale(1.2)' } },
+                        floatDown: { '0%': { opacity: 1, transform: 'translateY(0) scale(1)' }, '100%': { opacity: 0, transform: 'translateY(60px) scale(0.8)' } },
+                        blob: { "0%": { transform: "translate(0px, 0px) scale(1)" }, "33%": { transform: "translate(30px, -50px) scale(1.1)" }, "66%": { transform: "translate(-20px, 20px) scale(0.9)" }, "100%": { transform: "translate(0px, 0px) scale(1)" } }
                     }
                 }
             }
@@ -76,167 +51,135 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap');
-        
-        body {
-            background-color: #09090b; /* Zinc 950 essentially */
-            color: #f4f4f5;
-        }
-
-        .glass-panel {
-            background: rgba(24, 24, 27, 0.65);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .glass-card {
-            background: rgba(39, 39, 42, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        /* Custom Scrollbar */
+        body { background-color: #09090b; color: #f4f4f5; }
+        .glass-panel { background: rgba(24, 24, 27, 0.65); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
+        .glass-card { background: rgba(39, 39, 42, 0.5); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #52525b; }
+        .avatar-option.selected { border-color: #8b5cf6; background-color: rgba(139, 92, 246, 0.2); transform: scale(1.1); }
     </style>
 </head>
 <body class="h-screen w-screen overflow-hidden flex flex-col md:flex-row p-2 md:p-6 gap-6 relative font-sans text-slate-200">
 
-    <!-- Background Blobs (Vibe Coding Aesthetic) -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none z-0 flex justify-center items-center opacity-30">
         <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-600 rounded-full mix-blend-screen filter blur-3xl opacity-50 animate-blob"></div>
         <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-blue-600 rounded-full mix-blend-screen filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
         <div class="absolute -bottom-32 left-1/2 w-96 h-96 bg-purple-600 rounded-full mix-blend-screen filter blur-3xl opacity-50 animate-blob animation-delay-4000"></div>
     </div>
 
-    <!-- MAIN CONTENT (Z-10) -->
+    <!-- MAIN CONTENT -->
     <div class="z-10 flex flex-col md:flex-row w-full h-full gap-6">
         
-        <!-- Painel de Controle e Gráfico -->
-        <aside class="w-full md:w-1/3 glass-panel rounded-3xl p-8 flex flex-col relative overflow-hidden group transition-all duration-300 hover:border-brand-500/30">
-            <header class="text-center mb-8 relative">
+        <!-- Painel Lateral -->
+        <aside class="w-full md:w-1/3 glass-panel rounded-3xl p-8 flex flex-col relative overflow-hidden group">
+            <header class="text-center mb-6 relative">
                 <div class="inline-flex items-center justify-center p-3 rounded-2xl bg-brand-500/10 mb-4 ring-1 ring-brand-500/30 shadow-[0_0_30px_rgba(139,92,246,0.2)]">
-                    <i data-lucide="sparkles" class="w-8 h-8 text-brand-400"></i>
+                    <i data-lucide="sparkles" class="w-8 h-8 text-brand-400 fallback-icon">✨</i>
                 </div>
-                <h1 class="text-4xl font-display font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-purple-400 to-blue-400 tracking-tight">
+                <h1 class="text-4xl font-display font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-purple-400 to-blue-400">
                     Aura Tracker
                 </h1>
-                <p class="text-slate-400 text-sm mt-2 font-medium tracking-wide">O Cortiço - Análise Discursiva</p>
                 
-                <div class="mt-4 flex items-center justify-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span id="playerDisplay" class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Identificando...</span>
+                <div class="mt-4 flex items-center justify-center gap-3 bg-white/5 p-3 rounded-2xl border border-white/10">
+                    <span id="playerAvatar" class="text-3xl">👤</span>
+                    <div class="flex flex-col items-start">
+                        <span id="playerDisplay" class="text-sm font-semibold text-slate-200 uppercase tracking-wider">Identificando...</span>
+                        <div class="flex items-center gap-1">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                            <span class="text-[10px] text-slate-400 uppercase tracking-widest">Online</span>
+                        </div>
+                    </div>
                 </div>
             </header>
             
             <div class="flex-1 flex flex-col items-center justify-center relative">
                 <div class="text-7xl font-display font-black mb-1 transition-all duration-500 tracking-tighter drop-shadow-2xl" id="auraScore">0</div>
-                <div class="text-brand-400/80 uppercase tracking-[0.2em] text-xs font-bold mb-10">Pontos de Aura</div>
+                <div class="text-brand-400/80 uppercase tracking-[0.2em] text-xs font-bold mb-4">Pontos de Aura</div>
                 
-                <div class="w-full h-48 md:h-64 relative">
+                <div class="w-full flex-1 min-h-[150px] relative">
                     <canvas id="auraChart"></canvas>
                 </div>
             </div>
 
-            <button onclick="openLeaderboard()" class="mt-6 w-full py-4 rounded-2xl glass-card flex items-center justify-center gap-3 text-slate-200 hover:text-white hover:bg-white/5 transition-all group/btn border border-white/5 hover:border-brand-500/40">
-                <i data-lucide="trophy" class="w-5 h-5 text-yellow-400 group-hover/btn:scale-110 transition-transform"></i>
-                <span class="font-semibold tracking-wide">Ranking Global</span>
+            <button onclick="openLeaderboard()" class="mt-4 w-full py-4 rounded-2xl glass-card flex items-center justify-center gap-3 text-slate-200 hover:text-white hover:bg-white/5 transition-all border border-white/5 hover:border-brand-500/40">
+                <i data-lucide="trophy" class="w-5 h-5 text-yellow-400 fallback-icon">🏆</i>
+                <span class="font-semibold tracking-wide">Ranking Global da Turma</span>
             </button>
 
-            <!-- Anim container -->
             <div id="animContainer" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-display font-black pointer-events-none opacity-0 z-50 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]"></div>
         </aside>
 
-        <!-- Área de Jogo / Questões -->
+        <!-- Área de Jogo -->
         <main class="w-full md:w-2/3 glass-panel rounded-3xl p-8 flex flex-col relative overflow-hidden">
             
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-white/10 pb-6">
                 <div class="flex items-center gap-3">
                     <div class="p-2 rounded-lg bg-blue-500/10 ring-1 ring-blue-500/30">
-                        <i data-lucide="book-open" class="w-5 h-5 text-blue-400"></i>
+                        <i data-lucide="book-open" class="w-5 h-5 text-blue-400 fallback-icon">📖</i>
                     </div>
-                    <h2 class="text-2xl font-display font-bold text-white">Desafios de Inferência</h2>
+                    <h2 class="text-2xl font-display font-bold text-white">Análise Discursiva</h2>
                 </div>
                 
-                <div class="relative group">
-                    <select id="chapterSelect" class="appearance-none bg-dark-800/80 backdrop-blur-md text-white border border-white/10 rounded-xl px-5 py-3 pr-10 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none font-medium cursor-pointer transition-all hover:border-white/20">
-                        <!-- Capítulos gerados via JS -->
+                <div class="relative w-full sm:w-64">
+                    <select id="chapterSelect" class="w-full appearance-none bg-dark-800/80 backdrop-blur-md text-white border border-white/10 rounded-xl px-4 py-3 pr-10 focus:ring-2 focus:ring-brand-500 outline-none font-medium cursor-pointer">
+                        <!-- Gerado via JS -->
                     </select>
-                    <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                    <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none fallback-icon">▼</i>
                 </div>
             </div>
 
-            <!-- Welcome State -->
-            <div id="welcomeArea" class="flex-1 flex flex-col items-center justify-center text-center animate-in fade-in zoom-in duration-500">
-                <div class="w-24 h-24 mb-6 rounded-full bg-brand-500/10 border border-brand-500/20 flex items-center justify-center shadow-[0_0_40px_rgba(139,92,246,0.15)]">
-                    <i data-lucide="brain" class="w-12 h-12 text-brand-400"></i>
+            <!-- Welcome -->
+            <div id="welcomeArea" class="flex-1 flex flex-col items-center justify-center text-center">
+                <div class="w-24 h-24 mb-6 rounded-full bg-brand-500/10 flex items-center justify-center border border-brand-500/20">
+                    <i data-lucide="brain" class="w-12 h-12 text-brand-400 fallback-icon">🧠</i>
                 </div>
                 <h2 class="text-3xl font-display font-bold text-white mb-4">Máquina de Aura Naturalista</h2>
                 <p class="text-slate-400 max-w-lg leading-relaxed text-lg">
-                    Selecione um capítulo de <span class="text-slate-200 font-semibold">"O Cortiço"</span> acima para começar. Responda criticamente às questões discursivas, compare com o padrão esperado e prove seu valor no ranking.
+                    Selecione um capítulo de <span class="text-slate-200 font-semibold">"O Cortiço"</span> acima. Existe exatamente <b>1 desafio de inferência</b> por capítulo.
                 </p>
             </div>
 
-            <!-- Question State -->
+            <!-- Question -->
             <div id="questionArea" class="flex-1 flex flex-col hidden h-full">
-                <div class="mb-6 flex gap-2 overflow-x-auto pb-2 custom-scrollbar" id="questionTabs">
-                    <!-- Abas das 5 questões -->
-                </div>
-
-                <div class="glass-card rounded-2xl p-6 mb-6 shadow-inner relative overflow-hidden">
+                <div class="glass-card rounded-2xl p-6 mb-4 shadow-inner relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-1 h-full bg-brand-500"></div>
-                    <h3 class="text-sm uppercase tracking-widest text-brand-400 font-bold mb-3 flex items-center gap-2">
-                        <i data-lucide="target" class="w-4 h-4"></i> Questão Atual
+                    <h3 class="text-sm uppercase tracking-widest text-brand-400 font-bold mb-2 flex items-center gap-2">
+                        <i data-lucide="target" class="w-4 h-4 fallback-icon">🎯</i> Questão Exclusiva do Capítulo
                     </h3>
                     <p id="questionText" class="text-slate-100 leading-relaxed text-lg font-medium"></p>
                 </div>
 
-                <div class="flex-1 flex flex-col gap-4 relative min-h-[200px]">
-                    <textarea id="studentAnswer" class="w-full flex-1 bg-dark-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-slate-100 placeholder-slate-600 focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none outline-none font-medium transition-all" placeholder="Digite sua análise aqui... Mergulhe no determinismo, animalização e críticas sociais do romance."></textarea>
+                <div class="flex-1 flex flex-col gap-4 relative min-h-[150px]">
+                    <textarea id="studentAnswer" class="w-full flex-1 bg-dark-900/50 border border-white/10 rounded-2xl p-6 text-slate-100 placeholder-slate-600 focus:ring-2 focus:ring-brand-500 resize-none outline-none font-medium" placeholder="Digite sua análise crítica aqui..."></textarea>
                     
-                    <button id="btnSubmit" class="absolute bottom-6 right-6 bg-white text-dark-900 hover:bg-slate-200 font-bold py-3 px-8 rounded-xl transition-all transform hover:scale-[1.02] hover:-translate-y-1 shadow-[0_10px_20px_rgba(255,255,255,0.1)] flex items-center gap-2 group">
+                    <button id="btnSubmit" class="absolute bottom-6 right-6 bg-white text-dark-900 hover:bg-slate-200 font-bold py-3 px-8 rounded-xl flex items-center gap-2 group">
                         <span>Verificar Resposta</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                        <i data-lucide="arrow-right" class="w-4 h-4 fallback-icon group-hover:translate-x-1 transition-transform">→</i>
                     </button>
                 </div>
 
-                <!-- Área de Autoavaliação / Feedback (Inicialmente Oculta) -->
-                <div id="evaluationArea" class="hidden mt-6 glass-card rounded-2xl p-6 border border-white/5 animate-in slide-in-from-bottom-4 duration-500 flex-shrink-0">
-                    <div class="bg-dark-900/80 rounded-xl p-5 border-l-4 border-emerald-500 mb-6">
-                        <h3 class="text-xs uppercase tracking-widest text-emerald-400 font-bold mb-2 flex items-center gap-2">
-                            <i data-lucide="check-circle" class="w-4 h-4"></i> Padrão de Resposta Esperado
-                        </h3>
+                <!-- Avaliação -->
+                <div id="evaluationArea" class="hidden mt-4 glass-card rounded-2xl p-5 border border-white/5 flex-shrink-0">
+                    <div class="bg-dark-900/80 rounded-xl p-4 border-l-4 border-emerald-500 mb-4">
+                        <h3 class="text-xs uppercase tracking-widest text-emerald-400 font-bold mb-2">Padrão de Resposta Esperado</h3>
                         <p id="expectedAnswer" class="text-slate-200 text-sm leading-relaxed font-medium"></p>
                     </div>
                     
-                    <h4 class="text-center text-white font-display font-semibold mb-5 text-lg">Como foi a sua análise? <span class="text-slate-400 text-sm font-normal block mt-1">Seja honesto. O universo (e o Supabase) observa.</span></h4>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <button onclick="farmAura(1000)" class="relative overflow-hidden group bg-dark-800/80 border border-emerald-500/30 hover:border-emerald-500 p-4 rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(16,185,129,0.2)]">
-                            <div class="absolute inset-0 bg-gradient-to-t from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                            <div class="relative z-10 flex flex-col items-center gap-2 text-emerald-400">
-                                <i data-lucide="flame" class="w-6 h-6"></i>
-                                <span class="font-bold text-sm uppercase tracking-wide">Fui Impecável</span>
-                                <span class="text-xl font-black">+1000</span>
-                            </div>
+                    <h4 class="text-center text-white font-display font-semibold mb-4">Como foi sua resposta comparada ao padrão?</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <button onclick="farmAura(1000)" class="bg-dark-800 border border-emerald-500/30 hover:border-emerald-500 p-3 rounded-xl flex flex-col items-center gap-1 text-emerald-400">
+                            <span class="font-bold text-xs uppercase">Acertei Totalmente</span>
+                            <span class="text-lg font-black">+1000</span>
                         </button>
-                        <button onclick="farmAura(400)" class="relative overflow-hidden group bg-dark-800/80 border border-yellow-500/30 hover:border-yellow-500 p-4 rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(234,179,8,0.2)]">
-                            <div class="absolute inset-0 bg-gradient-to-t from-yellow-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                            <div class="relative z-10 flex flex-col items-center gap-2 text-yellow-400">
-                                <i data-lucide="sun" class="w-6 h-6"></i>
-                                <span class="font-bold text-sm uppercase tracking-wide">Quase lá</span>
-                                <span class="text-xl font-black">+400</span>
-                            </div>
+                        <button onclick="farmAura(400)" class="bg-dark-800 border border-yellow-500/30 hover:border-yellow-500 p-3 rounded-xl flex flex-col items-center gap-1 text-yellow-400">
+                            <span class="font-bold text-xs uppercase">Acertei Parcialmente</span>
+                            <span class="text-lg font-black">+400</span>
                         </button>
-                        <button onclick="farmAura(-300)" class="relative overflow-hidden group bg-dark-800/80 border border-rose-500/30 hover:border-rose-500 p-4 rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(244,63,94,0.2)]">
-                            <div class="absolute inset-0 bg-gradient-to-t from-rose-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                            <div class="relative z-10 flex flex-col items-center gap-2 text-rose-400">
-                                <i data-lucide="skull" class="w-6 h-6"></i>
-                                <span class="font-bold text-sm uppercase tracking-wide">Senso Comum</span>
-                                <span class="text-xl font-black">-300</span>
-                            </div>
+                        <button onclick="farmAura(-300)" class="bg-dark-800 border border-rose-500/30 hover:border-rose-500 p-3 rounded-xl flex flex-col items-center gap-1 text-rose-400">
+                            <span class="font-bold text-xs uppercase">Errei / Senso Comum</span>
+                            <span class="text-lg font-black">-300</span>
                         </button>
                     </div>
                 </div>
@@ -244,550 +187,340 @@
         </main>
     </div>
 
-    <!-- MODAL: LOGIN / IDENTIFICAÇÃO -->
-    <div id="loginModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
-        <div class="glass-panel rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl border border-white/10 transform scale-95 transition-transform duration-300" id="loginModalContent">
-            <div class="text-center mb-8">
-                <div class="w-16 h-16 bg-brand-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-brand-500/30">
-                    <i data-lucide="user-circle" class="w-8 h-8 text-brand-400"></i>
-                </div>
-                <h2 class="text-2xl font-display font-bold text-white">Identifique-se</h2>
-                <p class="text-slate-400 text-sm mt-2">Para registrar sua Aura no Ranking Global, precisamos do seu nome.</p>
+    <!-- MODAL LOGIN -->
+    <div id="loginModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity">
+        <div class="glass-panel rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl border border-white/10" id="loginModalContent">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-display font-bold text-white mb-2">Crie sua Identidade</h2>
+                <p class="text-slate-400 text-sm">Escolha seu avatar e digite seu nome para o ranking.</p>
             </div>
             
-            <form id="loginForm" class="flex flex-col gap-4">
-                <input type="text" id="playerNameInput" required placeholder="Seu Nome / Apelido" class="w-full bg-dark-900/50 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-slate-500 focus:ring-2 focus:ring-brand-500 outline-none font-medium text-lg text-center transition-all">
-                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(124,58,237,0.3)] hover:shadow-[0_0_30px_rgba(124,58,237,0.5)] flex items-center justify-center gap-2">
-                    <span>Entrar no Cortiço</span>
-                    <i data-lucide="log-in" class="w-5 h-5"></i>
-                </button>
+            <form id="loginForm" class="flex flex-col gap-6">
+                
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-slate-400 font-bold mb-3 text-center">Selecione seu Avatar</label>
+                    <div class="grid grid-cols-5 gap-3 justify-center" id="avatarSelection">
+                        <!-- Avatares JS -->
+                    </div>
+                </div>
+
+                <input type="text" id="playerNameInput" required placeholder="Seu Nome" class="w-full bg-dark-900/50 border border-white/10 rounded-xl px-5 py-4 text-white text-center font-bold text-lg outline-none focus:border-brand-500">
+                
+                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-4 rounded-xl">Entrar no Jogo</button>
             </form>
         </div>
     </div>
 
-    <!-- MODAL: LEADERBOARD -->
-    <div id="leaderboardModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
-        <div class="glass-panel rounded-3xl w-full max-w-2xl mx-4 max-h-[80vh] flex flex-col shadow-2xl border border-white/10 transform scale-95 transition-transform duration-300" id="leaderboardModalContent">
-            
+    <!-- MODAL LEADERBOARD -->
+    <div id="leaderboardModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity">
+        <div class="glass-panel rounded-3xl w-full max-w-2xl mx-4 max-h-[80vh] flex flex-col shadow-2xl border border-white/10">
             <div class="p-6 border-b border-white/10 flex justify-between items-center bg-white/5 rounded-t-3xl">
-                <div class="flex items-center gap-3">
-                    <i data-lucide="trophy" class="w-6 h-6 text-yellow-400"></i>
-                    <h2 class="text-2xl font-display font-bold text-white">Ranking Global</h2>
-                </div>
-                <button onclick="closeLeaderboard()" class="p-2 rounded-full hover:bg-white/10 transition-colors text-slate-400 hover:text-white">
-                    <i data-lucide="x" class="w-5 h-5"></i>
+                <h2 class="text-2xl font-display font-bold text-white flex items-center gap-3">
+                    <i data-lucide="trophy" class="w-6 h-6 text-yellow-400 fallback-icon">🏆</i> Ranking Global
+                </h2>
+                <button onclick="closeLeaderboard()" class="text-slate-400 hover:text-white">
+                    <i data-lucide="x" class="w-6 h-6 fallback-icon">✕</i>
                 </button>
             </div>
             
-            <div class="flex-1 overflow-y-auto p-2 custom-scrollbar relative min-h-[300px]" id="leaderboardList">
-                <!-- Conteúdo Injetado via JS -->
-                <div class="absolute inset-0 flex items-center justify-center text-slate-500" id="leaderboardLoading">
-                    <i data-lucide="loader-2" class="w-8 h-8 animate-spin"></i>
-                </div>
-            </div>
-            
-            <div class="p-4 border-t border-white/10 bg-black/20 rounded-b-3xl text-center">
-                <p class="text-xs text-slate-500">Aura baseada no desempenho crítico. Atualizado em tempo real.</p>
+            <div class="flex-1 overflow-y-auto p-4 custom-scrollbar relative min-h-[300px]" id="leaderboardList">
+                <div class="absolute inset-0 flex items-center justify-center text-slate-500" id="leaderboardLoading">Carregando...</div>
             </div>
         </div>
     </div>
 
-    <!-- TOAST NOTIFICATION -->
-    <div id="toast" class="fixed bottom-6 right-6 glass-card border-brand-500/50 border px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-32 opacity-0 transition-all duration-300 z-[110]">
-        <i data-lucide="cloud-upload" class="w-5 h-5 text-brand-400"></i>
-        <span id="toastMsg" class="font-medium text-sm text-slate-200"></span>
-    </div>
-
-    <!-- ==================== SCRIPTS ==================== -->
+    <!-- SCRIPTS -->
     <script>
-        // Inicializar ícones com segurança
-        if (window.lucide) {
-            try { lucide.createIcons(); } catch(e) { console.warn(e); }
-        }
-
-        // ==========================================
-        // CONFIGURAÇÃO SUPABASE (PREENCHER AQUI!!!)
-        // ==========================================
-        const SUPABASE_URL = 'https://tjvaszhoigbbqnbdpezx.supabase.co'; // Ex: 'https://xxxx.supabase.co'
-        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqdmFzemhvaWdiYnFuYmRwZXp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUwNzgzNTIsImV4cCI6MjEwMDY1NDM1Mn0.xBfUEaOBEc7_AFtuIHMJftrEBV4W3GUDL7Dh7IkYGbE';
-        
-        let supabase = null;
-        try {
-            // Só inicializa se as chaves tiverem sido trocadas ou se a biblioteca carregou
-            if (SUPABASE_URL !== 'YOUR_SUPABASE_URL' && window.supabase) {
-                supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        // Init ícones de forma super segura
+        function renderIcons() {
+            if (window.lucide) {
+                try {
+                    lucide.createIcons();
+                    document.querySelectorAll('.fallback-icon').forEach(el => el.style.display = 'none');
+                } catch(e) {}
             }
-        } catch(e) {
-            console.warn("Supabase não configurado corretamente.", e);
         }
+        renderIcons();
 
-        // ==========================================
-        // DADOS DO JOGO (Banco Local de Questões)
-        // ==========================================
+        // 23 QUESTÕES EXCLUSIVAS
         const corticoData = {
-            1: [
-                { q: "Como a trajetória inicial de João Romão ilustra o conceito de 'acumulação primitiva' de capital?", a: "João Romão enriquece através da exploração absoluta do trabalho alheio (Bertoleza), privação extrema das próprias necessidades (não consome, apenas acumula) e pequenos furtos. Ele representa o capitalismo selvagem em sua gênese." },
-                { q: "Analise a relação entre João Romão e Bertoleza sob a ótica da transição do trabalho escravo para o livre.", a: "Romão a engana com uma falsa alforria, mantendo-a na condição de escravizada enquanto extrai seu trabalho e suas economias. Representa a manutenção das lógicas escravocratas sob a máscara de relações 'modernas' de interesse." },
-                { q: "Qual a importância da pedreira no espaço que João Romão começa a construir?", a: "A pedreira é a base material e literal do cortiço. Fornece a matéria-prima (pedra) extraída pelo suor dos trabalhadores, simbolizando a exploração física bruta que sustenta a estrutura capitalista do local." },
-                { q: "Como o narrador descreve o surgimento das primeiras casinhas do cortiço?", a: "As casinhas surgem de forma orgânica e desordenada, descritas com vocabulário biológico/zoológico, indicando que o espaço será um organismo vivo, submetido às leis da natureza e do determinismo." },
-                { q: "De que maneira a figura de João Romão se opõe à figura inicial de Miranda?", a: "Romão é o burguês em ascensão, focado no lucro bruto e sem refinamento. Miranda é o burguês já estabelecido, preocupado com status, aparência, títulos e o ócio, representando uma classe que consome, enquanto Romão apenas acumula." }
-            ],
-            2: [
-                { q: "O que o sobrado de Miranda representa em contraposição ao cortiço?", a: "O sobrado representa a elite, o individualismo, o isolamento social e a tentativa de superioridade civilizatória europeia, enquanto o cortiço (abaixo) representa a massa, o coletivo, a animalidade e a mistura racial/social." },
-                { q: "Explique a dinâmica do casamento entre Miranda e Estela.", a: "É um casamento de fachada e conveniência burguesa. Miranda não a ama e é traído, mas não se separa para não perder o dote e o status social, evidenciando a hipocrisia e a moral corrompida da elite." },
-                { q: "Como a inveja atua como motor das actions de Miranda e João Romão neste capítulo?", a: "Miranda inveja o crescimento vertiginoso do vizinho; Romão inveja o status (o título de barão) e a respeitabilidade de Miranda. Essa inveja mútua move a competição capitalista entre eles." },
-                { q: "Qual o papel de Zulmira, filha de Miranda, na estrutura familiar apresentada?", a: "Zulmira é vítima do ambiente gélido do sobrado. Carente de afeto, ela é ignorada pelos pais, que estão presos em suas próprias hipocrisias, servindo como peça de negociação futura para a ascensão social do pai." },
-                { q: "Qual é a reação de Miranda ao perceber que o cortiço não para de crescer?", a: "Ele sente-se ameaçado em seu isolamento aristocrático e tenta, inicialmente, impor limites físicos (o muro). A disputa pelo muro simboliza a luta de classes territorial na formação do Rio de Janeiro." }
-            ],
-            3: [
-                { q: "Jerônimo e Piedade chegam ao cortiço. Como eles são descritos inicialmente (antes da influência do meio)?", a: "Eles representam o português trabalhador, puritano, honesto e focado na economia e na moralidade europeia. Jerônimo é forte, metódico e incorruptível neste momento inicial." },
-                { q: "Compare o modelo de imigração de Jerônimo com o de João Romão.", a: "Jerônimo é o imigrante operário, que vende sua força de trabalho braçal. Romão é o imigrante capitalista explorador, que lucra sobre o trabalho dos outros. Ambos mostram facetas da imigração portuguesa no Brasil." },
-                { q: "Como o 'acordar' do cortiço é descrito nas manhãs e o que isso revela da estética naturalista?", a: "O cortiço acorda como um formigueiro ou um monstro suado. As funções biológicas (lavar-se, urinar, respirar) são destacadas, comprovando o zoomorfismo: a redução do homem ao animal coletivo." },
-                { q: "Qual a função simbólica das lavadeiras (como Leocádia e Paula) na dinâmica do espaço?", a: "Elas são a voz do cortiço, o 'jornal' local. As lavadeiras representam o aspecto mais visceral e comunitário do espaço, onde não há privacidade, e tudo é coletivizado na fofoca e no trabalho." },
-                { q: "Identifique um traço de determinismo do meio que já começa a se insinuar neste capítulo.", a: "O calor constante, a promiscuidade do espaço físico apertado e a mistura de odores começam a ser descritos como forças esmagadoras que aos poucos vão entorpecer a moralidade dos recém-chegados europeus." }
-            ],
-            4: [
-                { q: "Como se dá a relação de Rita Baiana com o espaço do cortiço?", a: "Rita Baiana é a personificação do Brasil no cortiço: sensual, livre, festeira, sedutora. Ela é a força da natureza (o meio brasileiro) que atua ativamente para modificar e atrair os que vêm de fora." },
-                { q: "Analise o impacto do primeiro encontro visual entre Jerônimo e Rita Baiana.", a: "Marca o início da corrupção moral de Jerônimo. A visão do corpo de Rita (e o cheiro) desperta os instintos animais que estavam adormecidos pela moralidade europeia dele." },
-                { q: "Qual o papel de Firmo na trama, sendo o companheiro de Rita?", a: "Firmo é o capoeirista, o malandro carioca. Ele representa a resistência física e cultural do brasileiro marginalizado e será o antagonista natural de Jerônimo na disputa por Rita (força local vs. força europeia)." },
-                { q: "O naturalismo costuma reduzir sentimentos a impulsos fisiológicos. Dê um exemplo disso no capítulo.", a: "A paixão nascente não é descrita como amor espiritual, mas como febre, suor, atração pelo cheiro do corpo e pelo movimento carnal, reduzindo o humano ao biológico." },
-                { q: "De que modo a música (o chorinho, o violão) funciona como um elemento do determinismo?", a: "A música age como um feitiço sensual que entorpece a razão europeia de Jerônimo, quebrando sua resistência moral e afundando-o na 'moleza' e na sensualidade do trópico." }
-            ],
-            5: [
-                { q: "Explique o processo de aburguesamento de João Romão.", a: "Após acumular muito capital, Romão percebe que dinheiro não basta; ele quer status. Começa a investir em aparência, móveis e tenta se aproximar de Miranda para conseguir um título de nobreza e respeitabilidade." },
-                { q: "Como Bertoleza reage ou é afetada pela mudança de comportamento de João Romão?", a: "Bertoleza torna-se um estorvo para a nova imagem de Romão. Enquanto ele se 'limpa' para a elite, ela continua sendo a escrava suja e trabalhadora, o que prenuncia seu descarte trágico." },
-                { q: "A aproximação entre João Romão e Miranda ilustra qual aliança social?", a: "A aliança entre o capital novo (o comerciante explorador) e o status tradicional (a elite aristocrática). O dinheiro compra o título, e o título valida o dinheiro." },
-                { q: "Analise a evolução arquitetônica do cortiço e o que ela simboliza.", a: "O cortiço se expande descontroladamente, engolindo os espaços ao redor. Simboliza a força implacável e predatória da especulação imobiliária e da miséria como negócio altamente lucrativo." },
-                { q: "Qual a visão do narrador sobre a massa de trabalhadores que habita as novas casinhas?", a: "O narrador os vê como engrenagens de uma máquina biológica e social. São descritos através de suas funções e defeitos, sem individualidade profunda, existindo apenas para gerar lucro a Romão." }
-            ]
+            1: { q: "Como a trajetória inicial de João Romão ilustra o conceito de 'acumulação primitiva' de capital, e qual a função de Bertoleza nesse processo?", a: "João Romão enriquece através da extrema privação de consumo próprio e da exploração absoluta do trabalho alheio (Bertoleza). Ele a engana com uma falsa alforria, simbolizando o capitalismo que se apropria e se disfarça sobre as lógicas da escravidão." },
+            2: { q: "O que o sobrado de Miranda representa estruturalmente em contraposição ao cortiço em formação, e qual a base do conflito entre os dois vizinhos?", a: "O sobrado representa o isolamento aristocrático/burguês europeizado, enquanto o cortiço é a força coletiva e desordenada do povo. O conflito é movido pela inveja: Miranda inveja a expansão territorial de Romão, e Romão inveja o status social (título) de Miranda." },
+            3: { q: "Analise a figura de Jerônimo antes de sofrer a influência do 'meio' brasileiro. O que ele representa na ótica naturalista?", a: "Jerônimo é o imigrante português idealizado inicialmente: puritano, focado no trabalho braçal, metódico e incorruptível. Ele representa a moralidade rígida europeia antes de ser 'contaminada' pelo determinismo climático e social dos trópicos." },
+            4: { q: "Explique a função de Rita Baiana como agente do determinismo sobre Jerônimo.", a: "Rita personifica a sensualidade, o calor e a cultura dionisíaca do Brasil. Ela é a força da natureza (o meio) que atua fisicamente sobre Jerônimo através dos sentidos (o cheiro, a dança), quebrando sua razão moral europeia." },
+            5: { q: "Qual a motivação para o súbito 'aburguesamento' de João Romão, e como isso afeta a visão que ele tem de Bertoleza?", a: "Acumulado o capital, Romão deseja status e respeitabilidade (título). Ele começa a investir em aparência para se igualar a Miranda. Ao fazer isso, a presença suja e escrava de Bertoleza passa a ser um estorvo para sua nova imagem elitista." },
+            6: { q: "Qual é o papel das lavadeiras (como Leocádia e Paula) na construção do cortiço como um organismo vivo?", a: "As lavadeiras representam o aspecto visceral do cortiço. A ausência de privacidade na lavagem das roupas simboliza a vida coletivizada, onde a fofoca e a vigilância mútua formam o 'sangue' social que corre nas veias do organismo cortiço." },
+            7: { q: "Analise a cena do chorinho e da dança. De que modo a música atua como força naturalista?", a: "A música age não como arte intelectual, mas como feitiço biológico. O chorinho entorpece a racionalidade europeia, estimulando instintos primitivos, a malemolência e os impulsos sexuais, provando a vitória da fisiologia sobre a moral." },
+            8: { q: "Como Firmo se posiciona no antagonismo direto contra Jerônimo?", a: "Firmo é o malandro carioca, o capoeirista que domina a rua e a destreza física local. Ele é o obstáculo natural de Jerônimo pela posse de Rita Baiana, representando o embate direto entre o português colonizador e o mestiço colonizado." },
+            9: { q: "Durante a briga na venda e o episódio da navalha, como os personagens são reduzidos à animalidade?", a: "Na visão naturalista de Aluísio, durante a violência extrema, o instinto de sobrevivência sobrepõe a civilidade. Os movimentos de Firmo (ágil como um gato/cobra) e a fúria cega de Jerônimo (como um touro) reduzem os humanos a feras brigando por território e acasalamento." },
+            10: { q: "Qual o impacto da consumação física da paixão entre Jerônimo e Rita Baiana na trajetória do português?", a: "Marca o ponto sem retorno de sua 'abrasileiração'. O ato físico sela a corrupção de sua ética original de trabalhador; ele abandona as obrigações familiares (Piedade) em prol da satisfação biológica." },
+            11: { q: "O que o acidente na pedreira revela sobre o valor da vida operária no sistema de João Romão?", a: "Revela que a vida humana é descartável perante a lógica do lucro. A pedra (matéria bruta) e a produtividade importam mais que a segurança dos trabalhadores, ilustrando a exploração desumana da classe baixa." },
+            12: { q: "O calor excessivo é constantemente citado pelo narrador. Como o clima atua como força motriz das ações?", a: "No determinismo geográfico da obra, o sol e o calor dos trópicos não apenas aquecem, mas 'derretem' a moralidade, incitam a promiscuidade e afrouxam os laços da civilidade importada da Europa." },
+            13: { q: "Como a condição fisiológica de Pombinha (sua menstruação tardia) a amarra ao cortiço inicialmente?", a: "A ausência da menstruação a impede de casar (cumprir seu papel social). Pombinha é a 'flor do lodo', a pureza ilhada no cortiço, provando que no naturalismo a fisiologia (biologia) comanda o destino social da mulher." },
+            14: { q: "O que a personagem Léonie representa na transformação moral de Pombinha?", a: "Léonie, a cortesã rica, mostra a Pombinha que a pureza e a pobreza são castigos, enquanto a prostituição elitizada traz conforto e status. Ela é a agente corruptora que desperta a sexualidade e o materialismo em Pombinha." },
+            15: { q: "Após ceder à paixão, como Jerônimo planeja sua vitória sobre Firmo e o que isso indica sobre sua moralidade?", a: "Ele abandona a luta justa (braçal) e age com traição e tocaia. Essa covardia premeditada indica que ele perdeu completamente seus antigos valores de honra portugueses, adaptando-se às regras selvagens de sobrevivência local." },
+            16: { q: "Qual o destino de Piedade após ser abandonada e o que isso comprova no romance?", a: "Piedade sucumbe ao desespero, à miséria e ao alcoolismo, passando a viver das sobras e da compaixão do cortiço. Comprova que o determinismo pune não só quem se entrega aos instintos, mas também quem não consegue se adaptar ao meio hostil." },
+            17: { q: "Qual é o sentido simbólico do grande incêndio que destrói parte do cortiço?", a: "O incêndio purga o espaço velho, destruindo as moradias miseráveis originais. Ele funciona como um elemento de renovação agressiva, abrindo espaço físico para o avanço do capitalismo imobiliário de Romão." },
+            18: { q: "Após o incêndio, nasce a 'Avenida São João'. Qual é a crítica naturalista à higienização das cidades?", a: "A crítica aponta que a urbanização moderna (a nova avenida) apenas mascara a exploração. A miséria ganha uma fachada respeitável e muros limpos, mas a essência do cortiço e do sofrimento trabalhador permanece sob a capa do progresso." },
+            19: { q: "O que a concretização do casamento de Romão com Zulmira (filha de Miranda) sela socialmente?", a: "Sela a vitória do capital bruto (Romão) que, enfim, consegue se fundir com a aristocracia/títulos (Miranda). A união das duas classes dominantes sobre os escombros e o sangue dos explorados." },
+            20: { q: "Como os moradores antigos (como Machona e Leocádia) terminam na nova configuração do cortiço?", a: "Eles continuam presos à miséria cíclica ou são expulsos. A prosperidade do local nunca é repassada aos trabalhadores que o ergueram; eles são apenas peças descartadas de uma máquina biológica e econômica." },
+            21: { q: "Por que Bertoleza passa a ser uma ameaça existencial e social para o plano de João Romão no final da obra?", a: "Prestes a casar com Zulmira e receber títulos nobres, Romão não pode ter sua imagem ligada a uma mulher negra, escrava fugida e amasiada. Ela é a prova viva de seus crimes e de sua verdadeira origem suja." },
+            22: { q: "Qual foi a manobra final de João Romão para se livrar de Bertoleza?", a: "Como não pode matá-la diretamente sem escândalo, ele denuncia o paradeiro dela aos seus antigos donos. Ele usa o próprio sistema jurídico-escravocrata do qual ele a 'salvou' falsamente no início para eliminá-la de forma 'legal'." },
+            23: { q: "Analise o desfecho: o suicídio de Bertoleza seguido da condecoração abolicionista de João Romão.", a: "Bertoleza rasga o ventre para não voltar ao cativeiro, sendo a vítima máxima do sistema. Ironicamente, Romão recebe uma comissão de abolicionistas que o glorifica. A obra fecha com a tese de que a burguesia se constrói na mais profunda hipocrisia e sobre os cadáveres dos oprimidos." }
         };
 
-        for (let i = 6; i <= 23; i++) {
-            corticoData[i] = [
-                { q: `[Cap ${i}] Analise as tensões sociais e conflitos de classe evidenciados neste capítulo.`, a: "O aluno deve identificar embates entre exploradores (Romão/Miranda) e explorados, ou disputas internas da classe trabalhadora geradas pela miséria, sob a ótica determinista." },
-                { q: `[Cap ${i}] Como o espaço físico e o clima (o meio) determinam as ações dos personagens aqui?`, a: "Espera-se a citação de exemplos de zoomorfismo, o calor, a promiscuidade ou a aglomeração forçando comportamentos instintivos e amorais nos personagens." },
-                { q: `[Cap ${i}] Comente a degradação moral ou a ascensão financeira de um personagem específico deste trecho.`, a: "A análise deve focar na perda de valores europeus (Jerônimo) ou na hipocrisia burguesa ascendente (Romão), mostrando que a ética é engolida pelas leis da sobrevivência." },
-                { q: `[Cap ${i}] Qual o papel da raça e da sexualidade na condução do enredo neste ponto?`, a: "A resposta deve abordar a visão naturalista de Aluísio Azevedo, onde o hibridismo racial e a sexualidade aflorada são vistos como forças atávicas do Brasil que 'corrompem' a civilização." },
-                { q: `[Cap ${i}] De que forma o coletivo do cortiço reage a eventos individuais (crimes, festas, brigas) neste capítulo?`, a: "O cortiço deve ser interpretado como um personagem único, um organismo vivo que pulsa, fofoca, julga e absorve os indivíduos, anulando o livre-arbítrio." }
-            ];
-        }
-
-        corticoData[22] = [
-            { q: "Analise o suicídio de Bertoleza à luz da luta de classes e do racismo estrutural.", a: "Bertoleza prefere a morte a voltar à escravidão. Seu suicídio é a prova final da exploração absoluta de Romão, que usou seu corpo, trabalho e dinheiro, descartando-a quando precisou limpar sua imagem racial e social para casar com Zulmira." },
-            { q: "Qual o significado da comissão de abolicionistas chegando ao cortiço no final?", a: "Representa a suprema ironia e hipocrisia social do livro: Romão, o homem que causou a morte da mulher que o enriqueceu para não lhe dar a liberdade legítima, é homenageado como um grande filantropo abolicionista." },
-            { q: "Como se consolida a transformação final de Jerônimo?", a: "Jerônimo abandona completamente a identidade europeia. Adota a preguiça, a malandragem, a bebida e a moral flexível. O determinismo do meio venceu a cultura de origem." },
-            { q: "O que o incêndio e a subsequente reconstrução do cortiço (a Avenida São João) representam?", a: "A gentrificação e a modernização do Rio de Janeiro. A miséria não acaba, ela é higienizada e maquiada (com as novas fachadas de Romão) para parecer respeitável, mantendo a exploração." },
-            { q: "O título de nobreza e a aliança com Miranda trazem redenção a João Romão?", a: "No naturalismo não há redenção moral, apenas vitória do mais forte. Romão 'vence' socialmente através do crime, traição e exploração, provando a tese de que a ética burguesa é construída sobre o sangue do oprimido." }
-        ];
-        corticoData[23] = corticoData[22];
-
-        // ==========================================
-        // VARIÁVEIS DE ESTADO E DOM
-        // ==========================================
+        // VARIÁVEIS
         let currentChapter = 1;
-        let currentQuestionIndex = 0;
+        let playerData = { id: null, name: null, avatar: '👤', aura: 0, history: [0] };
         
-        // Dados do Usuário
-        let playerData = JSON.parse(localStorage.getItem('cortico_player')) || { id: null, name: null, aura: 0, history: [0] };
+        const SUPABASE_URL = 'https://tjvaszhoigbbqnbdpezx.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqdmFzemhvaWdiYnFuYmRwZXp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUwNzgzNTIsImV4cCI6MjEwMDY1NDM1Mn0.xBfUEaOBEc7_AFtuIHMJftrEBV4W3GUDL7Dh7IkYGbE';
+        let supabase = null;
+
+        // Tenta inicializar SDK do Supabase
+        try {
+            if (window.supabase) supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        } catch(e) {}
+
+        // AVATARES
+        const avatars = ['🦊', '🦉', '🦁', '🐼', '🐸', '🦄', '🐱', '🐶', '🐰', '🐙'];
         
-        // Elementos DOM
+        // DOM Elements
+        const playerDisplay = document.getElementById('playerDisplay');
+        const playerAvatar = document.getElementById('playerAvatar');
+        const auraScore = document.getElementById('auraScore');
         const chapterSelect = document.getElementById('chapterSelect');
-        const questionTabs = document.getElementById('questionTabs');
         const questionText = document.getElementById('questionText');
+        const expectedAnswer = document.getElementById('expectedAnswer');
         const studentAnswer = document.getElementById('studentAnswer');
         const btnSubmit = document.getElementById('btnSubmit');
         const evaluationArea = document.getElementById('evaluationArea');
-        const expectedAnswer = document.getElementById('expectedAnswer');
-        const auraScore = document.getElementById('auraScore');
-        const animContainer = document.getElementById('animContainer');
-        const questionArea = document.getElementById('questionArea');
         const welcomeArea = document.getElementById('welcomeArea');
-        const playerDisplay = document.getElementById('playerDisplay');
-        const toast = document.getElementById('toast');
-        const toastMsg = document.getElementById('toastMsg');
+        const questionArea = document.getElementById('questionArea');
 
-        // Modals
-        const loginModal = document.getElementById('loginModal');
-        const loginModalContent = document.getElementById('loginModalContent');
-        const loginForm = document.getElementById('loginForm');
-        const playerNameInput = document.getElementById('playerNameInput');
-        
-        const leaderboardModal = document.getElementById('leaderboardModal');
-        const leaderboardModalContent = document.getElementById('leaderboardModalContent');
-        const leaderboardList = document.getElementById('leaderboardList');
-        const leaderboardLoading = document.getElementById('leaderboardLoading');
-
-        // ==========================================
-        // GRÁFICO (CHART.JS)
-        // ==========================================
-        let auraChartInstance;
-        function initChart() {
-            const ctx = document.getElementById('auraChart').getContext('2d');
+        // Lógica Principal
+        function initApp() {
+            try { loadLocalData(); } catch(e){}
             
-            // Gradiente para a linha
-            let gradient = ctx.createLinearGradient(0, 0, 0, 400);
-            gradient.addColorStop(0, 'rgba(139, 92, 246, 0.5)'); // brand-500
+            buildAvatarSelection();
+            buildChapterSelect();
+            
+            try { initChart(); } catch(e) { console.warn("Chart n carregou", e); }
+            
+            if (!playerData.id || !playerData.name) {
+                document.getElementById('loginModal').classList.remove('hidden');
+                setTimeout(() => document.getElementById('loginModal').classList.remove('opacity-0'), 10);
+            } else {
+                updateUI();
+            }
+
+            chapterSelect.addEventListener('change', (e) => {
+                currentChapter = parseInt(e.target.value);
+                loadQuestion();
+            });
+
+            btnSubmit.addEventListener('click', () => {
+                if(studentAnswer.value.trim() === "") {
+                    studentAnswer.classList.add('ring-2', 'ring-rose-500');
+                    setTimeout(() => studentAnswer.classList.remove('ring-2', 'ring-rose-500'), 1000);
+                    return;
+                }
+                btnSubmit.classList.add('hidden');
+                studentAnswer.disabled = true;
+                evaluationArea.classList.remove('hidden');
+            });
+        }
+
+        function loadLocalData() {
+            const saved = localStorage.getItem('cortico_v3');
+            if(saved) playerData = JSON.parse(saved);
+        }
+
+        function saveLocalData() {
+            try { localStorage.setItem('cortico_v3', JSON.stringify(playerData)); } catch(e){}
+        }
+
+        function buildAvatarSelection() {
+            const container = document.getElementById('avatarSelection');
+            avatars.forEach(av => {
+                const div = document.createElement('div');
+                div.className = `avatar-option text-3xl cursor-pointer p-2 rounded-xl text-center border-2 border-transparent transition-all hover:bg-white/10`;
+                div.innerText = av;
+                if(av === playerData.avatar) div.classList.add('selected');
+                
+                div.onclick = () => {
+                    document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
+                    div.classList.add('selected');
+                    playerData.avatar = av;
+                };
+                container.appendChild(div);
+            });
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('playerNameInput').value.trim();
+            if (name) {
+                playerData.id = 'id_' + Math.random().toString(36).substr(2, 9);
+                playerData.name = name;
+                if(!playerData.avatar) playerData.avatar = '👤';
+                saveLocalData();
+                
+                document.getElementById('loginModal').classList.add('opacity-0');
+                setTimeout(() => document.getElementById('loginModal').classList.add('hidden'), 300);
+                
+                updateUI();
+                syncSupabase();
+            }
+        });
+
+        function updateUI() {
+            playerDisplay.innerText = playerData.name;
+            playerAvatar.innerText = playerData.avatar;
+            auraScore.innerText = playerData.aura;
+            if(window.auraChartInstance) {
+                auraChartInstance.data.labels = playerData.history.map((_, i) => 'Desafio ' + i);
+                auraChartInstance.data.datasets[0].data = playerData.history;
+                auraChartInstance.update();
+            }
+        }
+
+        function buildChapterSelect() {
+            for (let i = 1; i <= 23; i++) {
+                let opt = document.createElement('option');
+                opt.value = i; opt.textContent = `Capítulo ${i}`;
+                chapterSelect.appendChild(opt);
+            }
+        }
+
+        function loadQuestion() {
+            welcomeArea.classList.add('hidden');
+            questionArea.classList.remove('hidden');
+            evaluationArea.classList.add('hidden');
+            studentAnswer.value = '';
+            studentAnswer.disabled = false;
+            btnSubmit.classList.remove('hidden');
+            
+            const data = corticoData[currentChapter];
+            questionText.textContent = data.q;
+            expectedAnswer.textContent = data.a;
+        }
+
+        window.farmAura = function(points) {
+            playerData.aura += points;
+            playerData.history.push(playerData.aura);
+            saveLocalData();
+            updateUI();
+            syncSupabase();
+
+            // Anim
+            const isPositive = points > 0;
+            const anim = document.getElementById('animContainer');
+            anim.textContent = isPositive ? `+${points} AURA!` : `${points} AURA...`;
+            anim.className = `absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-5xl font-display font-black pointer-events-none z-50 drop-shadow-[0_0_20px_rgba(255,255,255,0.6)] ${isPositive ? 'text-emerald-400 animate-float-up' : 'text-rose-500 animate-float-down'}`;
+            anim.style.opacity = '1';
+            
+            setTimeout(() => {
+                anim.style.opacity = '0';
+                anim.classList.remove('animate-float-up', 'animate-float-down');
+                if (currentChapter < 23) {
+                    currentChapter++;
+                    chapterSelect.value = currentChapter;
+                    loadQuestion();
+                }
+            }, 1000);
+        }
+
+        async function syncSupabase() {
+            if (!supabase || !playerData.id) return;
+            try {
+                await supabase.from('leaderboard').upsert({ 
+                    id: playerData.id, 
+                    student_name: playerData.name, 
+                    score: playerData.aura,
+                    avatar: playerData.avatar // REQUER NOVA COLUNA NO BANCO
+                }, { onConflict: 'id' });
+            } catch (err) {}
+        }
+
+        window.openLeaderboard = async function() {
+            document.getElementById('leaderboardModal').classList.remove('hidden');
+            setTimeout(() => document.getElementById('leaderboardModal').classList.remove('opacity-0'), 10);
+            
+            const list = document.getElementById('leaderboardList');
+            list.innerHTML = `<div class="absolute inset-0 flex items-center justify-center text-slate-400">Consultando o Universo...</div>`;
+            
+            if (!supabase) {
+                list.innerHTML = `<div class="text-center text-yellow-500 mt-10">Banco de Dados Offline.</div>`;
+                return;
+            }
+
+            try {
+                const { data, error } = await supabase.from('leaderboard').select('student_name, score, avatar').order('score', { ascending: false }).limit(20);
+                if (error || !data) throw error;
+                
+                list.innerHTML = '';
+                data.forEach((player, index) => {
+                    const row = document.createElement('div');
+                    row.className = `flex items-center justify-between p-4 mb-2 rounded-xl ${index === 0 ? 'bg-yellow-500/10 border border-yellow-500/30' : 'bg-dark-800 border border-white/5'} transition-all`;
+                    
+                    let rankBadge = `<span class="w-8 h-8 flex items-center justify-center font-bold text-slate-400 bg-black/30 rounded-lg">#${index+1}</span>`;
+                    if(index === 0) rankBadge = `<span class="w-8 h-8 flex items-center justify-center text-xl">🏆</span>`;
+                    if(index === 1) rankBadge = `<span class="w-8 h-8 flex items-center justify-center text-xl">🥈</span>`;
+                    if(index === 2) rankBadge = `<span class="w-8 h-8 flex items-center justify-center text-xl">🥉</span>`;
+
+                    const av = player.avatar || '👤';
+
+                    row.innerHTML = `
+                        <div class="flex items-center gap-4">
+                            ${rankBadge}
+                            <span class="text-2xl">${av}</span>
+                            <span class="font-bold text-lg text-white">${player.student_name}</span>
+                        </div>
+                        <div class="font-display font-black text-xl text-brand-400">${player.score}</div>
+                    `;
+                    list.appendChild(row);
+                });
+            } catch (err) {
+                list.innerHTML = `<div class="text-center text-rose-500 mt-10">Falha ao buscar ranking. Verifique as chaves e a coluna "avatar".</div>`;
+            }
+        }
+
+        window.closeLeaderboard = function() {
+            document.getElementById('leaderboardModal').classList.add('opacity-0');
+            setTimeout(() => document.getElementById('leaderboardModal').classList.add('hidden'), 300);
+        }
+
+        // CHART
+        let auraChartInstance = null;
+        function initChart() {
+            if(!window.Chart) return;
+            const ctx = document.getElementById('auraChart').getContext('2d');
+            let gradient = ctx.createLinearGradient(0, 0, 0, 150);
+            gradient.addColorStop(0, 'rgba(139, 92, 246, 0.4)');
             gradient.addColorStop(1, 'rgba(139, 92, 246, 0.0)');
 
             auraChartInstance = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: playerData.history.map((_, i) => 'Q' + i),
+                    labels: playerData.history.map((_, i) => 'Desafio ' + i),
                     datasets: [{
-                        label: 'Evolução',
-                        data: playerData.history,
-                        borderColor: '#a855f7',
-                        backgroundColor: gradient,
-                        borderWidth: 3,
-                        pointBackgroundColor: '#fff',
-                        pointBorderColor: '#8b5cf6',
-                        pointBorderWidth: 2,
-                        pointRadius: 4,
-                        pointHoverRadius: 6,
-                        fill: true,
-                        tension: 0.4
+                        data: playerData.history, borderColor: '#a855f7', backgroundColor: gradient,
+                        borderWidth: 3, pointBackgroundColor: '#fff', pointBorderColor: '#8b5cf6',
+                        fill: true, tension: 0.4
                     }]
                 },
                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } },
-                    scales: {
-                        y: { 
-                            grid: { color: 'rgba(255,255,255,0.05)', drawBorder: false },
-                            ticks: { color: '#71717a', font: { family: 'Inter' } }
-                        },
-                        x: { 
-                            grid: { display: false, drawBorder: false },
-                            ticks: { color: '#71717a', font: { family: 'Inter' } }
-                        }
-                    },
-                    interaction: { mode: 'nearest', axis: 'x', intersect: false }
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { display: false }, x: { display: false } },
+                    interaction: { mode: 'index', intersect: false }
                 }
             });
         }
 
-        function updateChart() {
-            auraChartInstance.data.labels = playerData.history.map((_, i) => 'Q' + i);
-            auraChartInstance.data.datasets[0].data = playerData.history;
-            auraChartInstance.update();
-        }
-
-        // ==========================================
-        // LÓGICA DE AUTENTICAÇÃO / LOGIN
-        // ==========================================
-        function checkAuth() {
-            if (!playerData.id || !playerData.name) {
-                // Mostrar Modal
-                loginModal.classList.remove('hidden');
-                // Timeout para permitir a transição CSS
-                setTimeout(() => {
-                    loginModal.classList.remove('opacity-0');
-                    loginModalContent.classList.remove('scale-95');
-                }, 10);
-            } else {
-                updatePlayerDisplay();
-            }
-        }
-
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = playerNameInput.value.trim();
-            if (name) {
-                // Gerar UUID simples se não existir crypto.randomUUID
-                const uuid = window.crypto && crypto.randomUUID ? crypto.randomUUID() : 'id_' + Math.random().toString(36).substr(2, 9);
-                
-                playerData.id = uuid;
-                playerData.name = name;
-                saveLocalData();
-                
-                // Fechar Modal
-                loginModal.classList.add('opacity-0');
-                loginModalContent.classList.add('scale-95');
-                setTimeout(() => { loginModal.classList.add('hidden'); }, 300);
-                
-                updatePlayerDisplay();
-                syncScoreToSupabase(); // Forçar criação no BD
-            }
-        });
-
-        function updatePlayerDisplay() {
-            playerDisplay.textContent = playerData.name;
-            auraScore.innerText = playerData.aura;
-        }
-
-        function saveLocalData() {
-            localStorage.setItem('cortico_player', JSON.stringify(playerData));
-        }
-
-        // ==========================================
-        // INTEGRAÇÃO SUPABASE
-        // ==========================================
-        async function syncScoreToSupabase() {
-            if (!supabase || !playerData.id) return;
-            
-            try {
-                const { data, error } = await supabase
-                    .from('leaderboard')
-                    .upsert({ 
-                        id: playerData.id, 
-                        student_name: playerData.name, 
-                        score: playerData.aura 
-                    }, { onConflict: 'id' });
-                
-                if (error) throw error;
-                showToast("Progresso salvo na nuvem ☁️");
-            } catch (err) {
-                console.error("Erro ao salvar no Supabase:", err);
-            }
-        }
-
-        async function fetchLeaderboardData() {
-            if (!supabase) return [];
-            try {
-                const { data, error } = await supabase
-                    .from('leaderboard')
-                    .select('student_name, score')
-                    .order('score', { ascending: false })
-                    .limit(10);
-                
-                if (error) throw error;
-                return data;
-            } catch (err) {
-                console.error("Erro ao buscar leaderboard:", err);
-                return [];
-            }
-        }
-
-        // ==========================================
-        // LÓGICA DO JOGO E UI
-        // ==========================================
-        function init() {
-            initChart();
-            
-            // Popular Select de Capítulos
-            for (let i = 1; i <= 23; i++) {
-                let opt = document.createElement('option');
-                opt.value = i;
-                opt.textContent = `Capítulo ${i}`;
-                chapterSelect.appendChild(opt);
-            }
-
-            chapterSelect.addEventListener('change', (e) => {
-                currentChapter = parseInt(e.target.value);
-                loadChapter();
-            });
-
-            btnSubmit.addEventListener('click', showEvaluation);
-            
-            checkAuth(); // Verifica se tem nome
-        }
-
-        function loadChapter() {
-            welcomeArea.classList.add('hidden');
-            questionArea.classList.remove('hidden');
-            evaluationArea.classList.add('hidden');
-            studentAnswer.value = '';
-            
-            currentQuestionIndex = 0;
-            renderTabs();
-            loadQuestion();
-        }
-
-        function renderTabs() {
-            questionTabs.innerHTML = '';
-            const questions = corticoData[currentChapter];
-            questions.forEach((_, index) => {
-                const btn = document.createElement('button');
-                
-                const isActive = index === currentQuestionIndex;
-                btn.className = `whitespace-nowrap px-5 py-2 rounded-xl text-sm font-bold transition-all duration-300 ${
-                    isActive 
-                    ? 'bg-brand-600 text-white shadow-[0_0_15px_rgba(124,58,237,0.4)]' 
-                    : 'bg-dark-800 text-slate-400 hover:bg-dark-700 hover:text-white border border-white/5'
-                }`;
-                btn.textContent = `Desafio ${index + 1}`;
-                btn.onclick = () => {
-                    currentQuestionIndex = index;
-                    renderTabs();
-                    loadQuestion();
-                };
-                questionTabs.appendChild(btn);
-            });
-        }
-
-        function loadQuestion() {
-            const data = corticoData[currentChapter][currentQuestionIndex];
-            questionText.textContent = data.q;
-            expectedAnswer.textContent = data.a;
-            studentAnswer.value = '';
-            
-            evaluationArea.classList.add('hidden');
-            
-            btnSubmit.classList.remove('hidden');
-            // Animar entrada do botão
-            btnSubmit.classList.add('animate-in', 'slide-in-from-bottom-4', 'fade-in');
-            
-            studentAnswer.disabled = false;
-            studentAnswer.focus();
-        }
-
-        function showEvaluation() {
-            if(studentAnswer.value.trim() === "") {
-                // Feedback visual de erro
-                studentAnswer.classList.add('ring-2', 'ring-rose-500');
-                setTimeout(() => studentAnswer.classList.remove('ring-2', 'ring-rose-500'), 1000);
-                return;
-            }
-            
-            btnSubmit.classList.add('hidden');
-            studentAnswer.disabled = true;
-            
-            evaluationArea.classList.remove('hidden');
-            // Re-trigger animation
-            evaluationArea.classList.remove('animate-in', 'slide-in-from-bottom-4');
-            void evaluationArea.offsetWidth; // trigger reflow
-            evaluationArea.classList.add('animate-in', 'slide-in-from-bottom-4');
-        }
-
-        window.farmAura = function(points) {
-            // Atualizar Status Local
-            playerData.aura += points;
-            playerData.history.push(playerData.aura);
-            saveLocalData();
-            
-            // Atualizar UI
-            auraScore.innerText = playerData.aura;
-            updateChart();
-
-            // Sincronizar com Nuvem (Async, não trava a tela)
-            syncScoreToSupabase();
-
-            // Efeito Visual do Número (Cores)
-            const isPositive = points > 0;
-            auraScore.classList.remove('text-transparent', 'bg-clip-text', 'bg-gradient-to-r', 'from-brand-400', 'via-purple-400', 'to-blue-400');
-            auraScore.style.color = isPositive ? '#34d399' : '#fb7185';
-            auraScore.style.transform = isPositive ? 'scale(1.1)' : 'scale(0.9)';
-            
-            setTimeout(() => {
-                auraScore.style.color = '';
-                auraScore.style.transform = 'scale(1)';
-                // Volta o gradiente original
-                auraScore.classList.add('text-transparent', 'bg-clip-text', 'bg-gradient-to-r', 'from-brand-400', 'via-purple-400', 'to-blue-400');
-            }, 600);
-
-            // Animação da Aura Flutuante
-            animContainer.textContent = isPositive ? `+${points} AURA!` : `${points} AURA...`;
-            animContainer.className = `absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-5xl font-display font-black pointer-events-none z-50 drop-shadow-[0_0_20px_rgba(255,255,255,0.6)] ${isPositive ? 'text-emerald-400 animate-float-up' : 'text-rose-500 animate-float-down'}`;
-            
-            setTimeout(() => {
-                animContainer.classList.remove('animate-float-up', 'animate-float-down');
-                animContainer.style.opacity = '0';
-                
-                // Próxima pergunta
-                if (currentQuestionIndex < 4) {
-                    currentQuestionIndex++;
-                    renderTabs();
-                    loadQuestion();
-                } else {
-                    questionText.textContent = "Capítulo concluído! Selecione outro no menu.";
-                    evaluationArea.classList.add('hidden');
-                    studentAnswer.value = "";
-                    studentAnswer.disabled = true;
-                    studentAnswer.placeholder = "Capítulo finalizado. Aguardando nova seleção...";
-                }
-            }, 1500);
-        }
-
-        // ==========================================
-        // LEADERBOARD UI MODAL
-        // ==========================================
-        window.openLeaderboard = async function() {
-            leaderboardModal.classList.remove('hidden');
-            setTimeout(() => {
-                leaderboardModal.classList.remove('opacity-0');
-                leaderboardModalContent.classList.remove('scale-95');
-            }, 10);
-
-            if (!supabase) {
-                leaderboardLoading.innerHTML = `<div class="text-center"><i data-lucide="alert-triangle" class="w-8 h-8 text-yellow-500 mx-auto mb-2"></i><p>Banco de dados não configurado.</p><p class="text-sm text-slate-500 mt-1">Preencha as chaves no código fonte.</p></div>`;
-                if (window.lucide) lucide.createIcons();
-                return;
-            }
-
-            leaderboardList.innerHTML = '';
-            leaderboardLoading.classList.remove('hidden');
-
-            const data = await fetchLeaderboardData();
-            
-            leaderboardLoading.classList.add('hidden');
-            
-            if (data.length === 0) {
-                leaderboardList.innerHTML = `<div class="h-full flex items-center justify-center text-slate-500">Nenhuma aura registrada ainda.</div>`;
-                return;
-            }
-
-            data.forEach((player, index) => {
-                // Estilos para top 3
-                let medal = '';
-                let bgClass = 'bg-dark-800/50';
-                let textClass = 'text-slate-300';
-                let borderClass = 'border-white/5';
-                
-                if (index === 0) {
-                    medal = '🥇'; bgClass = 'bg-yellow-500/10'; textClass = 'text-yellow-400 font-bold'; borderClass = 'border-yellow-500/30';
-                } else if (index === 1) {
-                    medal = '🥈'; bgClass = 'bg-slate-300/10'; textClass = 'text-slate-200 font-bold'; borderClass = 'border-slate-300/30';
-                } else if (index === 2) {
-                    medal = '🥉'; bgClass = 'bg-amber-700/20'; textClass = 'text-amber-500 font-bold'; borderClass = 'border-amber-700/30';
-                }
-
-                // Destacar o jogador atual
-                const isMe = player.student_name === playerData.name;
-                if (isMe) {
-                    bgClass = 'bg-brand-600/20';
-                    borderClass = 'border-brand-500/50';
-                }
-
-                const row = document.createElement('div');
-                row.className = `flex items-center justify-between p-4 mb-2 rounded-xl border ${bgClass} ${borderClass} transition-all hover:scale-[1.01]`;
-                row.innerHTML = `
-                    <div class="flex items-center gap-4">
-                        <span class="text-xl font-black w-8 text-center ${textClass}">${medal || (index + 1)}</span>
-                        <div class="flex flex-col">
-                            <span class="text-lg font-display text-white ${isMe ? 'font-bold' : ''}">${player.student_name} ${isMe ? '<span class="text-xs bg-brand-500 text-white px-2 py-0.5 rounded-full ml-2">Você</span>' : ''}</span>
-                        </div>
-                    </div>
-                    <div class="text-right flex items-center gap-2">
-                        <span class="text-2xl font-black ${textClass} tracking-tighter">${player.score}</span>
-                        <i data-lucide="sparkles" class="w-4 h-4 ${textClass}"></i>
-                    </div>
-                `;
-                leaderboardList.appendChild(row);
-            });
-            if (window.lucide) lucide.createIcons();
-        }
-
-        window.closeLeaderboard = function() {
-            leaderboardModal.classList.add('opacity-0');
-            leaderboardModalContent.classList.add('scale-95');
-            setTimeout(() => { leaderboardModal.classList.add('hidden'); }, 300);
-        }
-
-        // ==========================================
-        // UTILIDADES
-        // ==========================================
-        function showToast(msg) {
-            toastMsg.textContent = msg;
-            toast.classList.remove('translate-y-32', 'opacity-0');
-            
-            setTimeout(() => {
-                toast.classList.add('translate-y-32', 'opacity-0');
-            }, 3000);
-        }
-
-        // Iniciar
-        init();
+        // Start
+        window.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
 </html>
