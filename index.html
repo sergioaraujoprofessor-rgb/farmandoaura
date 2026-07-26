@@ -8,11 +8,8 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Chart.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <!-- Supabase JS SDK -->
-    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <!-- Lucide Icons -->
     <script defer src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
@@ -96,12 +93,20 @@
                 </div>
             </header>
             
-            <div class="flex-1 flex flex-col items-center justify-center relative z-10 mt-2">
-                <div class="text-6xl font-display font-black mb-1 transition-all duration-500 tracking-tighter text-brand-300 drop-shadow-[0_0_15px_rgba(167,139,250,0.5)]" id="auraScore">0</div>
-                <div class="text-brand-400/80 uppercase tracking-[0.2em] text-xs font-bold mb-6">Pontos de Aura</div>
+            <div class="flex-1 flex flex-col items-center justify-center relative z-10 mt-2 w-full">
+                <!-- RANK SIGMA -->
+                <div id="sigmaRank" class="text-xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-400 to-slate-200 mb-1 uppercase tracking-[0.2em] drop-shadow-lg text-center transition-all duration-500">
+                    Iniciante
+                </div>
                 
-                <div class="w-full flex-1 min-h-[120px] relative">
-                    <canvas id="auraChart"></canvas>
+                <div class="text-6xl font-display font-black mb-1 transition-all duration-500 tracking-tighter text-brand-300 drop-shadow-[0_0_15px_rgba(167,139,250,0.5)]" id="auraScore">0</div>
+                <div class="text-brand-400/80 uppercase tracking-[0.2em] text-xs font-bold mb-4">Pontos de Aura</div>
+                
+                <!-- PROGRESS BAR METER -->
+                <div class="w-4/5 max-w-[200px] h-6 bg-dark-900 rounded-full border border-white/10 overflow-hidden relative shadow-inner flex items-center p-[2px]">
+                    <div id="auraPowerFill" class="h-full w-[5%] bg-gradient-to-r from-slate-600 to-slate-400 rounded-full transition-all duration-1000 ease-out relative overflow-hidden">
+                        <div class="absolute inset-0 bg-white/20 animate-[pulse_1.5s_infinite]"></div>
+                    </div>
                 </div>
             </div>
 
@@ -377,8 +382,6 @@
             
             buildChapterSelect();
             
-            try { initChart(); } catch(e) { console.warn("Chart n carregou", e); }
-            
             if (!playerData.id || !playerData.name) {
                 document.getElementById('loginModal').classList.remove('hidden');
                 setTimeout(() => document.getElementById('loginModal').classList.remove('opacity-0'), 10);
@@ -548,10 +551,32 @@
             }
 
             auraScore.innerText = playerData.aura;
-            if(window.auraChartInstance) {
-                auraChartInstance.data.labels = playerData.history.map((_, i) => 'Desafio ' + i);
-                auraChartInstance.data.datasets[0].data = playerData.history;
-                auraChartInstance.update();
+
+            // Atualiza Aura Meter e Sigma Rank
+            const powerFill = document.getElementById('auraPowerFill');
+            const sigmaRank = document.getElementById('sigmaRank');
+            if (powerFill && sigmaRank) {
+                let points = playerData.aura;
+                let percentage = Math.min(Math.max((points / 5000) * 100, 5), 100);
+                powerFill.style.width = `${percentage}%`;
+
+                if (points < 0) {
+                    sigmaRank.innerText = "BETA NEGATIVO 💀";
+                    sigmaRank.className = "text-xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-red-600 mb-1 uppercase tracking-[0.1em] drop-shadow-lg animate-pulse";
+                    powerFill.className = "h-full w-full bg-gradient-to-r from-rose-700 to-rose-500 rounded-full transition-all duration-1000 ease-out relative overflow-hidden";
+                } else if (points >= 5000) {
+                    sigmaRank.innerText = "SIGMA ABSOLUTO 🐺";
+                    sigmaRank.className = "text-xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 mb-1 uppercase tracking-[0.1em] drop-shadow-[0_0_15px_rgba(52,211,153,0.8)]";
+                    powerFill.className = "h-full bg-gradient-to-r from-emerald-500 to-cyan-400 rounded-full transition-all duration-1000 ease-out relative overflow-hidden shadow-[0_0_20px_rgba(52,211,153,0.5)]";
+                } else if (points >= 2000) {
+                    sigmaRank.innerText = "AURA CRESCENTE ✨";
+                    sigmaRank.className = "text-xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-brand-400 mb-1 uppercase tracking-[0.1em] drop-shadow-lg";
+                    powerFill.className = "h-full bg-gradient-to-r from-purple-500 to-brand-400 rounded-full transition-all duration-1000 ease-out relative overflow-hidden";
+                } else {
+                    sigmaRank.innerText = "INICIANTE";
+                    sigmaRank.className = "text-xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-400 to-slate-200 mb-1 uppercase tracking-[0.1em] drop-shadow-lg";
+                    powerFill.className = "h-full bg-gradient-to-r from-slate-600 to-slate-400 rounded-full transition-all duration-1000 ease-out relative overflow-hidden";
+                }
             }
 
             // Aura Glow Effect
@@ -698,33 +723,7 @@
             setTimeout(() => document.getElementById('leaderboardModal').classList.add('hidden'), 300);
         }
 
-        // CHART
-        let auraChartInstance = null;
-        function initChart() {
-            if(!window.Chart) return;
-            const ctx = document.getElementById('auraChart').getContext('2d');
-            let gradient = ctx.createLinearGradient(0, 0, 0, 150);
-            gradient.addColorStop(0, 'rgba(139, 92, 246, 0.4)');
-            gradient.addColorStop(1, 'rgba(139, 92, 246, 0.0)');
-
-            auraChartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: playerData.history.map((_, i) => 'Desafio ' + i),
-                    datasets: [{
-                        data: playerData.history, borderColor: '#a855f7', backgroundColor: gradient,
-                        borderWidth: 3, pointBackgroundColor: '#fff', pointBorderColor: '#8b5cf6',
-                        fill: true, tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: { y: { display: false }, x: { display: false } },
-                    interaction: { mode: 'index', intersect: false }
-                }
-            });
-        }
+        // Chart.js removido em favor da barra Sigma animada
 
         // Start Blindado
         function safeStart() {
