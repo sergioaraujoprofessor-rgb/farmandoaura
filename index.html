@@ -436,10 +436,6 @@
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqdmFzemhvaWdiYnFuYmRwZXp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUwNzgzNTIsImV4cCI6MjEwMDY1NDM1Mn0.xBfUEaOBEc7_AFtuIHMJftrEBV4W3GUDL7Dh7IkYGbE';
         let supabaseClient = null;
 
-        // Tenta inicializar SDK do Supabase
-        try {
-            if (window.supabase) supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        } catch(e) {}
 
         // DOM Elements
         const playerDisplay = document.getElementById('playerDisplay');
@@ -458,6 +454,11 @@
         function initApp() {
             if (window.appInitialized) return;
             window.appInitialized = true;
+            
+            // Tenta inicializar SDK do Supabase
+            try {
+                if (window.supabase) supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+            } catch(e) {}
             
             try { loadLocalData(); } catch(e){}
             
