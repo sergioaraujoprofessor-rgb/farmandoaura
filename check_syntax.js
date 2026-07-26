@@ -1,0 +1,528 @@
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff', 100: '#ede9fe', 200: '#ddd6fe', 300: '#c4b5fd', 400: '#a78bfa',
+                            500: '#8b5cf6', 600: '#7c3aed', 700: '#6d28d9', 800: '#5b21b6', 900: '#4c1d95',
+                        },
+                        dark: { 900: '#09090b', 800: '#18181b', 700: '#27272a' }
+                    },
+                    animation: {
+                        'float-up': 'floatUp 1.5s ease-out forwards',
+                        'float-down': 'floatDown 1.5s ease-out forwards',
+                        'blob': "blob 7s infinite",
+                    },
+                    keyframes: {
+                        floatUp: { '0%': { opacity: 1, transform: 'translateY(0) scale(1)' }, '100%': { opacity: 0, transform: 'translateY(-60px) scale(1.2)' } },
+                        floatDown: { '0%': { opacity: 1, transform: 'translateY(0) scale(1)' }, '100%': { opacity: 0, transform: 'translateY(60px) scale(0.8)' } },
+                        blob: { "0%": { transform: "translate(0px, 0px) scale(1)" }, "33%": { transform: "translate(30px, -50px) scale(1.1)" }, "66%": { transform: "translate(-20px, 20px) scale(0.9)" }, "100%": { transform: "translate(0px, 0px) scale(1)" } }
+                    }
+                }
+            }
+        }
+        // Init ícones de forma super segura
+        function renderIcons() {
+            if (window.lucide) {
+                try {
+                    lucide.createIcons();
+                    document.querySelectorAll('.fallback-icon').forEach(el => el.style.display = 'none');
+                } catch(e) {}
+            }
+        }
+        renderIcons();
+
+        // 23 QUESTÕES EXCLUSIVAS (COM DICAS PEDAGÓGICAS PARA O 9º ANO)
+        const corticoData = {
+            1: { 
+                q: "Como a trajetória inicial de João Romão ilustra o conceito de 'acumulação primitiva' de capital, e qual a função de Bertoleza nesse processo?<br><span class='text-xs text-brand-300 mt-2 block'>💡 <b>Dica:</b> 'Acumulação primitiva' é o começo do enriquecimento, geralmente feito de forma agressiva, economizando tudo e explorando o trabalho dos outros sem pagar o justo.</span>", 
+                a: "João Romão enriquece através da extrema privação de consumo próprio (não gasta com nada) e da exploração absoluta do trabalho alheio (Bertoleza). Ele a engana com uma falsa alforria, provando que ele se apropria e se disfarça sobre as lógicas da escravidão para lucrar." 
+            },
+            2: { 
+                q: "O que o sobrado de Miranda representa estruturalmente em contraposição (oposição) ao cortiço em formação, e qual a base do conflito entre os dois vizinhos?", 
+                a: "O sobrado representa o isolamento aristocrático/burguês (o rico focado no status e costumes finos), enquanto o cortiço é a força misturada e desordenada do povão. O conflito é movido pela inveja: Miranda inveja o tamanho das terras de Romão, e Romão inveja o status social e o título de nobreza de Miranda." 
+            },
+            3: { 
+                q: "Analise a figura de Jerônimo antes de sofrer a influência do 'meio' brasileiro. O que ele representa na ótica naturalista?<br><span class='text-xs text-brand-300 mt-2 block'>💡 <b>Dica:</b> A 'ótica naturalista' é a ideia literária de que o ser humano é como um animal guiado por instintos, moldado e transformado pelo ambiente em que vive.</span>", 
+                a: "Jerônimo é o imigrante português idealizado no início: focado no trabalho pesado, metódico e incorruptível. Ele representa a moralidade rígida europeia antes de ser 'contaminada' pelo determinismo do clima quente e pelo ambiente social do Brasil." 
+            },
+            4: { 
+                q: "Explique a função de Rita Baiana como 'agente do determinismo' sobre Jerônimo.<br><span class='text-xs text-brand-300 mt-2 block'>💡 <b>Dica:</b> 'Agente do determinismo' é aquela pessoa que influencia, desperta os instintos e muda o comportamento do outro através do contato físico e do ambiente.</span>", 
+                a: "Rita personifica a sensualidade, o calor e a cultura dionisíaca do Brasil (focada no prazer, na emoção intensa e na festa). Ela é a força da natureza que atua sobre Jerônimo através dos sentidos (o cheiro, a dança), quebrando a razão e a disciplina moral dele." 
+            },
+            5: { 
+                q: "Qual a motivação para o súbito 'aburguesamento' de João Romão, e como isso afeta a visão que ele tem de Bertoleza?<br><span class='text-xs text-brand-300 mt-2 block'>💡 <b>Dica:</b> 'Aburguesamento' é a vontade desesperada de virar 'burguês', ou seja, tentar ter o comportamento, o luxo e a aparência das pessoas mais ricas e finas da sociedade.</span>", 
+                a: "Após juntar muito dinheiro, Romão deseja status e respeito (quer um título de nobreza). Ele começa a gastar com aparência para se igualar ao vizinho Miranda. Ao fazer isso, a presença suja e escrava de Bertoleza (que o ajudou a enriquecer) passa a ser uma vergonha para sua nova imagem." 
+            },
+            6: { 
+                q: "Qual é o papel das lavadeiras (como Leocádia e Paula) na construção do cortiço como um 'organismo vivo'?", 
+                a: "As lavadeiras representam o lado mais visceral (profundo e exposto) do cortiço. A falta de privacidade enquanto lavam roupas simboliza a vida misturada de todos ali. As fofocas e a vigilância mútua formam o 'sangue' social que dá vida ao cortiço como se ele fosse um grande animal vivo." 
+            },
+            7: { 
+                q: "Analise a cena do chorinho e da dança. De que modo a música atua como força naturalista, provando a vitória da fisiologia sobre a moral?<br><span class='text-xs text-brand-300 mt-2 block'>💡 <b>Dica:</b> A 'vitória da fisiologia sobre a moral' acontece quando os desejos do corpo (fisiologia) falam mais alto do que as regras do que é considerado 'certo e educado' (moral).</span>", 
+                a: "A música age como um feitiço biológico. O ritmo do chorinho entorpece a mente europeia de Jerônimo, estimulando instintos primitivos, a moleza e os desejos do corpo, provando que a biologia vence a educação moral no ambiente do cortiço." 
+            },
+            8: { 
+                q: "Como Firmo se posiciona no antagonismo direto contra Jerônimo?<br><span class='text-xs text-brand-300 mt-2 block'>💡 <b>Dica:</b> 'Antagonismo direto' significa rivalidade total, como inimigos naturais disputando o mesmo espaço ou o mesmo objetivo.</span>", 
+                a: "Firmo é o malandro carioca, capoeirista ágil e dono da rua. Ele é o obstáculo natural de Jerônimo na disputa por Rita Baiana, representando o combate direto entre o português colonizador (força bruta) e o brasileiro colonizado (jeitinho e agilidade)." 
+            },
+            9: { 
+                q: "Durante a briga na venda e o episódio da navalha, como os personagens são 'reduzidos à animalidade'?", 
+                a: "Na visão de Aluísio Azevedo, durante a violência extrema, o instinto de sobrevivência apaga a inteligência humana. Os movimentos ágeis de Firmo (como um gato) e a fúria cega de Jerônimo (como um touro) reduzem os dois a feras irracionais brigando por fêmea e território." 
+            },
+            10: { 
+                q: "Qual o impacto da consumação física da paixão entre Jerônimo e Rita Baiana na trajetória do português?", 
+                a: "O ato marca o ponto sem volta de sua 'abrasileiração'. Ele se corrompe por inteiro: abandona seus antigos valores de trabalhador fiel, larga sua esposa (Piedade) e abraça a preguiça e a satisfação dos instintos." 
+            },
+            11: { 
+                q: "O que o acidente na pedreira revela sobre a lógica de trabalho de João Romão?", 
+                a: "Revela a terrível 'lógica do lucro' (o dinheiro valendo mais que a vida). Para Romão, a pedra e a produção importam mais que a segurança dos trabalhadores. A vida operária é descartável no sistema capitalista desenfreado dele." 
+            },
+            12: { 
+                q: "O calor excessivo é constantemente citado. Como o clima atua como força motriz das ações através do 'determinismo geográfico'?<br><span class='text-xs text-brand-300 mt-2 block'>💡 <b>Dica:</b> 'Determinismo geográfico' é a teoria da época que afirmava que o clima quente (tropical) deixava as pessoas mais guiadas pelos instintos, emoções e desejos sexuais do que pela razão.</span>", 
+                a: "No livro, o sol e o calor do Brasil não apenas aquecem, mas 'derretem' a vergonha e a moralidade importadas da Europa, incitando a mistura dos corpos e afrouxando as regras sociais." 
+            },
+            13: { 
+                q: "Como a condição biológica de Pombinha (sua menstruação atrasada) a amarra ao cortiço inicialmente?", 
+                a: "A demora da primeira menstruação a impede de casar (já que era o requisito social para provar que a mulher era 'adulta'). Ela é a 'flor do lodo' (uma pureza ilhada na sujeira), provando que, no Naturalismo, é a biologia do corpo que dita o destino da pessoa." 
+            },
+            14: { 
+                q: "O que a personagem Léonie representa na transformação moral de Pombinha e em seu 'materialismo'?<br><span class='text-xs text-brand-300 mt-2 block'>💡 <b>Dica:</b> O 'Materialismo', neste caso, é a valorização extrema do dinheiro, das roupas de luxo e dos bens materiais acima do caráter.</span>", 
+                a: "Léonie, a prostituta rica, mostra a Pombinha que a pureza sendo pobre é um castigo, enquanto a vida dupla traz muito conforto e status. Léonie é a corruptora que desperta o amor pelo luxo e a ganância na jovem Pombinha." 
+            },
+            15: { 
+                q: "Após ceder à paixão, como Jerônimo planeja sua vitória sobre Firmo e o que isso indica sobre sua moralidade?<br><span class='text-xs text-brand-300 mt-2 block'>💡 <b>Dica:</b> Uma 'tocaia' é uma armadilha covarde, esconder-se para atacar o inimigo de surpresa.</span>", 
+                a: "Ele abandona a luta justa, de homem para homem, e resolve fazer uma tocaia. Essa vingança nas sombras indica que ele perdeu completamente seus antigos valores de honra europeia, assumindo a selvageria local." 
+            },
+            16: { 
+                q: "Qual o destino de Piedade após ser abandonada, e o que isso comprova no romance?", 
+                a: "Piedade se afunda na depressão, na miséria e no alcoolismo, vivendo de sobras. Isso comprova que o ambiente do cortiço pune e destrói todos: tanto os que se entregam aos instintos (Jerônimo) quanto os que não conseguem se defender dele (Piedade)." 
+            },
+            17: { 
+                q: "Qual é o sentido simbólico do grande incêndio que destrói parte do cortiço?<br><span class='text-xs text-brand-300 mt-2 block'>💡 <b>Dica:</b> O fogo aqui não é só um acidente, ele age como uma 'purga', ou seja, uma limpeza forçada e violenta do espaço velho para dar lugar ao novo.</span>", 
+                a: "O incêndio funciona como uma limpeza brutal, destruindo a área mais podre e miserável. Ele abre espaço físico para João Romão construir prédios mais bonitos e avançar em sua ambição por riqueza." 
+            },
+            18: { 
+                q: "Após o incêndio, nasce a 'Avenida São João'. Qual é a crítica do autor à 'higienização das cidades'?<br><span class='text-xs text-brand-300 mt-2 block'>💡 <b>Dica:</b> 'Higienização das cidades' era a tentativa dos políticos de deixar a cidade mais 'bonita' empurrando os pobres para as periferias e morros, maquiando a miséria em vez de ajudar as pessoas.</span>", 
+                a: "A crítica aponta que a modernização apenas mascara o problema. A avenida ganha uma fachada respeitável e rica, mas a essência de exploração e o sofrimento do trabalhador continuam escondidos atrás das paredes limpas." 
+            },
+            19: { 
+                q: "O que a concretização do casamento de João Romão com Zulmira (filha do vizinho rico) sela socialmente?", 
+                a: "Esse casamento sela a união entre o Capital Bruto (o dinheiro sujo de Romão) com a Aristocracia (o título de nobreza e o sobrenome fino de Miranda). É a vitória dos poderosos pisando nos pobres para se manterem no topo." 
+            },
+            20: { 
+                q: "Como os moradores antigos (como Machona e Leocádia) terminam na nova configuração do cortiço?", 
+                a: "Eles continuam presos à miséria cíclica (que nunca tem fim) ou são expulsos pelo aluguel mais caro. A prosperidade e a riqueza do lugar nunca são repassadas para os pobres que construíram tudo com o próprio suor." 
+            },
+            21: { 
+                q: "Por que Bertoleza passa a ser uma ameaça social para o plano de João Romão no final da obra?", 
+                a: "Prestes a casar com a nobre Zulmira, Romão não pode ter sua imagem manchada por viver amasiado (sem ser casado) com uma negra que na verdade é escrava fugida. Ela vira a prova viva dos roubos dele." 
+            },
+            22: { 
+                q: "Qual foi a manobra covarde de João Romão para se livrar de Bertoleza através do 'sistema jurídico-escravocrata'?<br><span class='text-xs text-brand-300 mt-2 block'>💡 <b>Dica:</b> O 'sistema jurídico-escravocrata' era o conjunto de leis do governo da época, que sempre beneficiavam os brancos ricos e os donos de escravos.</span>", 
+                a: "Como não pode matá-la com as próprias mãos sem ser preso, Romão denuncia onde ela está para os antigos donos dela. Ele usa a polícia e as leis (o mesmo sistema que ele enganou antes) para eliminá-la sem sujar as mãos." 
+            },
+            23: { 
+                q: "Analise o desfecho chocante: o suicídio de Bertoleza e a homenagem prestada a João Romão, evidenciando a 'hipocrisia burguesa'.<br><span class='text-xs text-brand-300 mt-2 block'>💡 <b>Dica:</b> 'Hipocrisia burguesa' é a falsidade dos ricos da época, que posavam de cidadãos de bem e honestos, mas que enriqueciam destruindo e roubando os mais fracos.</span>", 
+                a: "Bertoleza rasga a própria barriga para não voltar a ser escrava, sendo a vítima máxima da exploração. Ironicamente, os ricos hipócritas chegam no mesmo instante para entregar uma medalha de honra para Romão. O livro fecha mostrando que o sucesso dos poderosos foi erguido sobre o sangue dos oprimidos." 
+            }
+        };
+
+        // VARIÁVEIS
+        let currentChapter = 1;
+        let playerData = { id: null, name: null, avatar: 'https://con3ktar.nekoweb.org/farmador.png', aura: 0, history: [0] };
+        
+        const SUPABASE_URL = 'https://tjvaszhoigbbqnbdpezx.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqdmFzemhvaWdiYnFuYmRwZXp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUwNzgzNTIsImV4cCI6MjEwMDY1NDM1Mn0.xBfUEaOBEc7_AFtuIHMJftrEBV4W3GUDL7Dh7IkYGbE';
+        let supabase = null;
+
+        // Tenta inicializar SDK do Supabase
+        try {
+            if (window.supabase) supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        } catch(e) {}
+
+        // DOM Elements
+        const playerDisplay = document.getElementById('playerDisplay');
+        const playerAvatar = document.getElementById('playerAvatar');
+        const auraScore = document.getElementById('auraScore');
+        const chapterSelect = document.getElementById('chapterSelect');
+        const questionText = document.getElementById('questionText');
+        const expectedAnswer = document.getElementById('expectedAnswer');
+        const studentAnswer = document.getElementById('studentAnswer');
+        const btnSubmit = document.getElementById('btnSubmit');
+        const evaluationArea = document.getElementById('evaluationArea');
+        const welcomeArea = document.getElementById('welcomeArea');
+        const questionArea = document.getElementById('questionArea');
+
+        // Lógica Principal
+        function initApp() {
+            if (window.appInitialized) return;
+            window.appInitialized = true;
+            
+            try { loadLocalData(); } catch(e){}
+            
+            buildChapterSelect();
+            
+            if (!playerData.id || !playerData.name) {
+                document.getElementById('loginModal').classList.remove('hidden');
+                setTimeout(() => document.getElementById('loginModal').classList.remove('opacity-0'), 10);
+            } else {
+                updateUI();
+            }
+
+            chapterSelect.addEventListener('change', (e) => {
+                currentChapter = parseInt(e.target.value);
+                loadQuestion();
+            });
+
+            btnSubmit.addEventListener('click', () => {
+                const text = studentAnswer.value.trim();
+                if(text === "") {
+                    studentAnswer.classList.add('ring-2', 'ring-rose-500');
+                    setTimeout(() => studentAnswer.classList.remove('ring-2', 'ring-rose-500'), 1000);
+                    return;
+                }
+                btnSubmit.classList.add('hidden');
+                studentAnswer.disabled = true;
+                
+                // Validação Automática
+                const data = corticoData[currentChapter];
+                const result = evaluateAnswer(text, data.a);
+                
+                const box = document.getElementById('autoFeedbackBox');
+                box.className = `absolute top-0 left-0 w-1 h-full ${result.bgClass}`;
+                
+                document.getElementById('autoFeedbackIcon').innerHTML = result.icon;
+                
+                const title = document.getElementById('autoFeedbackTitle');
+                title.textContent = result.title;
+                title.className = `text-xl font-display font-bold text-${result.colorClass}`;
+                
+                const pts = document.getElementById('autoFeedbackPoints');
+                pts.textContent = result.points > 0 ? '+' + result.points : result.points;
+                pts.className = `text-3xl font-black font-display text-${result.colorClass} drop-shadow-md`;
+
+                evaluationArea.classList.remove('hidden');
+                renderIcons(); // Rerender icons inside expectedAnswer if any
+                
+                // Distribui aura com um pequeno delay visual
+                setTimeout(() => {
+                    farmAura(result.points);
+                }, 800);
+            });
+        }
+
+        // Lógica de Validação NLP Simples
+        function evaluateAnswer(studentText, expectedText) {
+            const cleanText = (t) => {
+                let temp = document.createElement("div"); 
+                temp.innerHTML = t; 
+                let str = temp.textContent || temp.innerText || "";
+                return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\w\s]/gi, '');
+            };
+            const stopWords = ['o', 'a', 'os', 'as', 'um', 'uma', 'e', 'de', 'do', 'da', 'dos', 'das', 'em', 'no', 'na', 'nos', 'nas', 'por', 'para', 'com', 'que', 'se', 'como', 'sua', 'seu', 'suas', 'seus', 'ele', 'ela', 'eles', 'elas', 'foi', 'era', 'e', 'sao', 'ser', 'ter', 'nao', 'mas', 'ou', 'ao', 'aos', 'isso', 'esse', 'essa', 'este', 'esta', 'aquilo', 'aquele', 'aquela', 'sobre', 'sob', 'entre', 'quando', 'onde', 'qual', 'quais', 'quem', 'porque', 'pois', 'entao', 'assim', 'ja', 'ainda', 'sem', 'nem', 'tambem', 'apenas', 'so', 'ate', 'mesmo', 'mais', 'muito', 'dica'];
+            
+            let expectedWords = cleanText(expectedText).split(/\s+/).filter(w => w.length > 3 && !stopWords.includes(w));
+            let studentWords = cleanText(studentText).split(/\s+/);
+            
+            let matches = 0;
+            let expectedUnique = [...new Set(expectedWords)];
+            expectedUnique.forEach(ew => {
+                if (studentWords.some(sw => sw.includes(ew) || ew.includes(sw))) {
+                    matches++;
+                }
+            });
+            
+            let percentage = expectedUnique.length > 0 ? (matches / expectedUnique.length) : 0;
+            
+            if (percentage >= 0.40) {
+                return { points: 1000, title: "Análise Excelente!", icon: "🌟", colorClass: "emerald-400", bgClass: "bg-emerald-500" };
+            } else if (percentage >= 0.15) {
+                return { points: 400, title: "Análise Razoável", icon: "👍", colorClass: "yellow-400", bgClass: "bg-yellow-500" };
+            } else {
+                return { points: -300, title: "Fugiu do Tema", icon: "💀", colorClass: "rose-500", bgClass: "bg-rose-600" };
+            }
+        }
+
+        function loadLocalData() {
+            const saved = localStorage.getItem('cortico_v3');
+            if(saved) playerData = JSON.parse(saved);
+        }
+
+        function saveLocalData() {
+            try { localStorage.setItem('cortico_v3', JSON.stringify(playerData)); } catch(e){}
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('playerNameInput').value.trim();
+            const btn = document.getElementById('btnLoginSubmit');
+            const status = document.getElementById('loginStatus');
+
+            if (name) {
+                btn.disabled = true;
+                btn.innerHTML = `<span>Buscando na Nuvem...</span><div class="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin"></div>`;
+                status.classList.remove('hidden');
+                status.innerText = "Acessando o banco de dados...";
+
+                if (supabase) {
+                    try {
+                        const { data, error } = await supabase.from('leaderboard').select('*').eq('student_name', name).single();
+                        
+                        if (data) {
+                            // Encontrou o jogador
+                            playerData.id = data.id;
+                            playerData.name = data.student_name;
+                            playerData.aura = data.score;
+                            playerData.avatar = data.avatar || 'https://con3ktar.nekoweb.org/farmador.png';
+                            playerData.history = [data.score];
+                            status.innerText = "Conta encontrada! Restaurando Aura...";
+                        } else {
+                            // Jogador Novo
+                            playerData.id = 'id_' + Math.random().toString(36).substr(2, 9);
+                            playerData.name = name;
+                            playerData.aura = 0;
+                            playerData.avatar = 'https://con3ktar.nekoweb.org/farmador.png';
+                            playerData.history = [0];
+                            status.innerText = "Novo perfil criado!";
+                        }
+                    } catch (err) {
+                        // Se falhou ou a api está offline (ex: erro de permissão ou não encontrou - o select().single() joga erro se não encontrar nada dependendo de como é feito)
+                        if (err.code === 'PGRST116') {
+                            // PGRST116 significa "0 rows returned" em um .single() query. É um jogador novo!
+                            playerData.id = 'id_' + Math.random().toString(36).substr(2, 9);
+                            playerData.name = name;
+                            playerData.aura = 0;
+                            playerData.avatar = 'https://con3ktar.nekoweb.org/farmador.png';
+                            playerData.history = [0];
+                            status.innerText = "Novo perfil criado!";
+                        } else {
+                            // Falha na conexão
+                            playerData.id = 'id_' + Math.random().toString(36).substr(2, 9);
+                            playerData.name = name;
+                            playerData.avatar = 'https://con3ktar.nekoweb.org/farmador.png';
+                            status.innerText = "Modo offline ativado.";
+                        }
+                    }
+                } else {
+                    // Sem supabase configurado
+                    playerData.id = 'id_' + Math.random().toString(36).substr(2, 9);
+                    playerData.name = name;
+                    playerData.avatar = 'https://con3ktar.nekoweb.org/farmador.png';
+                }
+
+                saveLocalData();
+                
+                setTimeout(() => {
+                    document.getElementById('loginModal').classList.add('opacity-0');
+                    setTimeout(() => document.getElementById('loginModal').classList.add('hidden'), 300);
+                    updateUI();
+                    syncSupabase(); // Se era novo, já faz o insert
+                }, 1000);
+            }
+        });
+
+        function updateUI() {
+            playerDisplay.innerText = playerData.name;
+            
+            if (playerData.avatar && playerData.avatar.includes('/')) {
+                playerAvatar.innerHTML = `<img src="${playerData.avatar}" class="w-full h-full object-cover">`;
+            } else {
+                playerAvatar.innerText = playerData.avatar || '👤';
+            }
+
+            auraScore.innerText = playerData.aura;
+
+            // Atualiza Aura Meter e Sigma Rank
+            const powerFill = document.getElementById('auraPowerFill');
+            const sigmaRank = document.getElementById('sigmaRank');
+            if (powerFill && sigmaRank) {
+                let points = playerData.aura;
+                let percentage = Math.min(Math.max((points / 5000) * 100, 5), 100);
+                powerFill.style.width = `${percentage}%`;
+
+                if (points < 0) {
+                    sigmaRank.innerText = "BETA NEGATIVO 💀";
+                    sigmaRank.className = "text-xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-red-600 mb-1 uppercase tracking-[0.1em] drop-shadow-lg animate-pulse";
+                    powerFill.className = "h-full w-full bg-gradient-to-r from-rose-700 to-rose-500 rounded-full transition-all duration-1000 ease-out relative overflow-hidden";
+                } else if (points >= 5000) {
+                    sigmaRank.innerText = "SIGMA ABSOLUTO 🐺";
+                    sigmaRank.className = "text-xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 mb-1 uppercase tracking-[0.1em] drop-shadow-[0_0_15px_rgba(52,211,153,0.8)]";
+                    powerFill.className = "h-full bg-gradient-to-r from-emerald-500 to-cyan-400 rounded-full transition-all duration-1000 ease-out relative overflow-hidden shadow-[0_0_20px_rgba(52,211,153,0.5)]";
+                } else if (points >= 2000) {
+                    sigmaRank.innerText = "AURA CRESCENTE ✨";
+                    sigmaRank.className = "text-xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-brand-400 mb-1 uppercase tracking-[0.1em] drop-shadow-lg";
+                    powerFill.className = "h-full bg-gradient-to-r from-purple-500 to-brand-400 rounded-full transition-all duration-1000 ease-out relative overflow-hidden";
+                } else {
+                    sigmaRank.innerText = "INICIANTE";
+                    sigmaRank.className = "text-xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-400 to-slate-200 mb-1 uppercase tracking-[0.1em] drop-shadow-lg";
+                    powerFill.className = "h-full bg-gradient-to-r from-slate-600 to-slate-400 rounded-full transition-all duration-1000 ease-out relative overflow-hidden";
+                }
+            }
+
+            // Aura Glow Effect
+            const glow = document.getElementById('auraGlow');
+            if (glow) {
+                let points = playerData.aura;
+                let level = Math.min(Math.max(points / 5000, 0), 1);
+                
+                if (points < 0) {
+                    glow.className = `absolute inset-0 bg-rose-600 rounded-full blur-2xl transition-all duration-1000`;
+                    glow.style.opacity = '0.5';
+                    glow.style.transform = `scale(1)`;
+                } else {
+                    const opacity = 0.2 + (level * 0.8); // 20% to 100%
+                    const scale = 1 + (level * 0.5); // 1.0 to 1.5
+                    
+                    if (points >= 5000) {
+                        glow.className = `absolute inset-0 bg-brand-400 rounded-full blur-3xl transition-all duration-1000`;
+                    } else if (points >= 2000) {
+                        glow.className = `absolute inset-0 bg-purple-500 rounded-full blur-2xl transition-all duration-1000`;
+                    } else {
+                        glow.className = `absolute inset-0 bg-brand-600 rounded-full blur-2xl transition-all duration-1000`;
+                    }
+                    
+                    glow.style.opacity = opacity.toString();
+                    glow.style.transform = `scale(${scale})`;
+                }
+            }
+        }
+
+        function buildChapterSelect() {
+            let defaultOpt = document.createElement('option');
+            defaultOpt.value = "";
+            defaultOpt.textContent = "Selecione um capítulo...";
+            defaultOpt.disabled = true;
+            defaultOpt.selected = true;
+            chapterSelect.appendChild(defaultOpt);
+
+            for (let i = 1; i <= 23; i++) {
+                let opt = document.createElement('option');
+                opt.value = i; opt.textContent = `Capítulo ${i}`;
+                chapterSelect.appendChild(opt);
+            }
+        }
+
+        function loadQuestion() {
+            welcomeArea.classList.add('hidden');
+            questionArea.classList.remove('hidden');
+            evaluationArea.classList.add('hidden');
+            studentAnswer.value = '';
+            studentAnswer.disabled = false;
+            btnSubmit.classList.remove('hidden');
+            
+            const data = corticoData[currentChapter];
+            questionText.innerHTML = data.q;
+            expectedAnswer.innerHTML = data.a;
+        }
+
+        window.farmAura = function(points) {
+            playerData.aura += points;
+            playerData.history.push(playerData.aura);
+            saveLocalData();
+            updateUI();
+            syncSupabase();
+
+            // Anim
+            const isPositive = points > 0;
+            const anim = document.getElementById('animContainer');
+            anim.textContent = isPositive ? `+${points} AURA!` : `${points} AURA...`;
+            anim.className = `absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-5xl font-display font-black pointer-events-none z-50 drop-shadow-[0_0_20px_rgba(255,255,255,0.6)] ${isPositive ? 'text-emerald-400 animate-float-up' : 'text-rose-500 animate-float-down'}`;
+            anim.style.opacity = '1';
+            
+            setTimeout(() => {
+                anim.style.opacity = '0';
+                anim.classList.remove('animate-float-up', 'animate-float-down');
+                if (currentChapter < 23) {
+                    currentChapter++;
+                    chapterSelect.value = currentChapter;
+                    loadQuestion();
+                }
+            }, 1000);
+        }
+
+        async function syncSupabase() {
+            if (!supabase || !playerData.id) return;
+            try {
+                await supabase.from('leaderboard').upsert({ 
+                    id: playerData.id, 
+                    student_name: playerData.name, 
+                    score: playerData.aura,
+                    avatar: playerData.avatar // REQUER NOVA COLUNA NO BANCO
+                }, { onConflict: 'id' });
+            } catch (err) {}
+        }
+
+        window.openLeaderboard = async function() {
+            document.getElementById('leaderboardModal').classList.remove('hidden');
+            setTimeout(() => document.getElementById('leaderboardModal').classList.remove('opacity-0'), 10);
+            
+            const list = document.getElementById('leaderboardList');
+            list.innerHTML = `<div class="absolute inset-0 flex items-center justify-center text-slate-400">Consultando o Universo...</div>`;
+            
+            if (!supabase) {
+                list.innerHTML = `<div class="text-center text-yellow-500 mt-10">Banco de Dados Offline.</div>`;
+                return;
+            }
+
+            try {
+                const { data, error } = await supabase.from('leaderboard').select('student_name, score, avatar').order('score', { ascending: false }).limit(20);
+                if (error || !data) throw error;
+                
+                list.innerHTML = '';
+                data.forEach((player, index) => {
+                    const row = document.createElement('div');
+                    row.className = `flex items-center justify-between p-4 mb-2 rounded-xl ${index === 0 ? 'bg-yellow-500/10 border border-yellow-500/30' : 'bg-dark-800 border border-white/5'} transition-all`;
+                    
+                    let rankBadge = `<span class="w-8 h-8 flex items-center justify-center font-bold text-slate-400 bg-black/30 rounded-lg">#${index+1}</span>`;
+                    if(index === 0) rankBadge = `<span class="w-8 h-8 flex items-center justify-center text-xl">🏆</span>`;
+                    if(index === 1) rankBadge = `<span class="w-8 h-8 flex items-center justify-center text-xl">🥈</span>`;
+                    if(index === 2) rankBadge = `<span class="w-8 h-8 flex items-center justify-center text-xl">🥉</span>`;
+
+                    let av = player.avatar || '👤';
+                    if (av.includes('/')) {
+                        av = `<img src="${av}" class="w-10 h-10 object-cover rounded-lg shadow-md border border-brand-500/30" onerror="this.src='https://ui-avatars.com/api/?name=Aura'">`;
+                    }
+
+                    row.innerHTML = `
+                        <div class="flex items-center gap-4">
+                            ${rankBadge}
+                            <div class="flex items-center justify-center w-10 h-10 text-2xl">${av}</div>
+                            <span class="font-bold text-lg text-white">${player.student_name}</span>
+                        </div>
+                        <div class="font-display font-black text-xl text-brand-400">${player.score}</div>
+                    `;
+                    list.appendChild(row);
+                });
+            } catch (err) {
+                list.innerHTML = `<div class="text-center text-rose-500 mt-10">Falha ao buscar ranking. Verifique as chaves e a coluna "avatar".</div>`;
+            }
+        }
+
+        window.closeLeaderboard = function() {
+            document.getElementById('leaderboardModal').classList.add('opacity-0');
+            setTimeout(() => document.getElementById('leaderboardModal').classList.add('hidden'), 300);
+        }
+
+        // Chart.js removido em favor da barra Sigma animada
+
+        // Start Blindado
+        function safeStart() {
+            try {
+                initApp();
+                renderIcons();
+            } catch (err) {
+                console.error("Erro na inicialização:", err);
+                const btn = document.getElementById('playerDisplay');
+                if(btn) btn.innerText = "ERRO: " + err.message;
+            }
+        }
+        
+        window.addEventListener('DOMContentLoaded', safeStart);
+        window.addEventListener('load', safeStart);
+        setTimeout(safeStart, 1000); // Fallback caso os eventos falhem

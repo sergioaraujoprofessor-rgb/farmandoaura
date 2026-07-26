@@ -854,13 +854,20 @@
                         av = `<img src="${av}" class="w-10 h-10 object-cover rounded-lg shadow-md border border-brand-500/30" onerror="this.src='https://ui-avatars.com/api/?name=Aura'">`;
                     }
 
+                    const isPlatinado = player.score >= 1000;
+                    const badge = isPlatinado ? '<span class="text-[10px] bg-yellow-500 text-black font-bold px-2 py-1 rounded ml-2 shadow-[0_0_10px_rgba(234,179,8,0.5)]">🎖️ PLATINOU</span>' : '';
+                    if (isPlatinado) {
+                        row.className = `flex items-center justify-between p-4 mb-2 rounded-xl bg-yellow-900/20 border border-yellow-400/50 hover:bg-white/10 transition-all`;
+                    }
+                    const scoreColor = isPlatinado ? 'text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.8)]' : 'text-brand-400';
+
                     row.innerHTML = `
                         <div class="flex items-center gap-4">
                             ${rankBadge}
                             <div class="flex items-center justify-center w-10 h-10 text-2xl">${av}</div>
-                            <span class="font-bold text-lg text-white">${player.student_name}</span>
+                            <span class="font-bold text-lg text-white flex items-center">${player.student_name} ${badge}</span>
                         </div>
-                        <div class="font-display font-black text-xl text-brand-400">${player.score}</div>
+                        <div class="font-display font-black text-xl ${scoreColor}">${player.score}</div>
                     `;
                     list.appendChild(row);
                 });
