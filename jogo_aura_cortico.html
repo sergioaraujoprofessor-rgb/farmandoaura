@@ -440,6 +440,13 @@
         }
 
         function buildChapterSelect() {
+            let defaultOpt = document.createElement('option');
+            defaultOpt.value = "";
+            defaultOpt.textContent = "Selecione um capítulo...";
+            defaultOpt.disabled = true;
+            defaultOpt.selected = true;
+            chapterSelect.appendChild(defaultOpt);
+
             for (let i = 1; i <= 23; i++) {
                 let opt = document.createElement('option');
                 opt.value = i; opt.textContent = `Capítulo ${i}`;
@@ -456,8 +463,8 @@
             btnSubmit.classList.remove('hidden');
             
             const data = corticoData[currentChapter];
-            questionText.textContent = data.q;
-            expectedAnswer.textContent = data.a;
+            questionText.innerHTML = data.q;
+            expectedAnswer.innerHTML = data.a;
         }
 
         window.farmAura = function(points) {
